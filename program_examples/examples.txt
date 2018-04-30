@@ -1,12 +1,29 @@
 Add example shell programs to this directory! Feel free to explain them here
 
 Richard
--------
+=======
 
-First shell program: 
+Note: The following internet resources were used to write these shells:
 
-Created a very basic shell in simple-shell.c that displays the "$ " when the shell is started.
+https://brennan.io/2015/01/16/write-a-shell-in-c/
+https://stackoverflow.com/questions/4788374/writing-a-basic-shell
+
+First shell program (shell-1.c): 
+--------------------------------
+Created a very basic shell in shell-1.c that displays the "$ " when the shell is started.
 
 The user can type into the shell, but there are no commands that are understood by the shell.
+
+Second shell program (shell-2.c):
+---------------------------------
+Built upon shell-1.c to create a slightly more advanced shell that can take in three different commands: cd, help, and exit. 
+
+The command cd is very similar to the built-in command that we use to change directories. You can go up a directory or switch to a specific directory by specifying in the argument. 
+
+The command help provides a brief explanation for the shell and provides the user with the three commands to use.
+
+The exit command exits the shell.
+
+In this shell, the user's current working directory is also printed above the command line.
 
 
