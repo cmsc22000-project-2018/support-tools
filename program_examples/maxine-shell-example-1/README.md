@@ -1,3 +1,13 @@
+Maxine's Commentary:
+===
+To run:
+make all
+./shell
+
+Details
+I took this from a website with an explanation of how everything works, and modified the free code in order to include my own commands and understand how to interface with it. All the commentary below comes from the original README associated with the main.c file. The Makefile and both extension files are mine.
+
+
 LSH
 ===
 
