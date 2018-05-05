@@ -10,21 +10,31 @@ Made by Marco Harnam Kaisth */
 char** lviz(trie_t* t, char path[], int level, char** return_arr, int* return_index)
 {
 	if (!t->children)
+		// If current node is a leaf
 	{
 		path[level] = '\0';
-		return_arr[return_index] = strdup(path); 
+		//Set the current index of the string to terminal char
+		return_arr[return_index] = strdup(path);
+		//Put the constructed string into the array of strings to be printed
+		*return_index++; 
+		//Increment the current index of said array
 	}
 
 	for (int i = 0; i < 255; i++)
+		// For all possible children
 	{
 		if (t->children[i])
+			// If such a child exists
 		{
 			path[level]=i+'a';
-			lviz(root->children[i], path, ++level);
+			// Make the current index of the string whatever char is present
+			lviz(root->children[i], path, ++level, return_arr, return_index);
+			// Recursively call lviz on the child node
 		}
 	}
 
 	return return_arr;
+	// Return the array of constructed strings
 }
 
 // Word visualization
@@ -35,21 +45,31 @@ char** lviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
 char** wviz(trie_t* t, char path[], int level, char** return_arr, int* return_index)
 {
 	if (t->is_word)
+		// If current node is a word
 	{
 		path[level] = '\0';
-		return_arr[return_index] = strdup(path); 
+		// Set current char of string to terminating char
+		return_arr[return_index] = strdup(path);
+		// Place string in constructed array to be printed
+		*return_index++;
+		// Increment index in said array
 	}
 
 	for (int i = 0; i < 255; i++)
+		// For all possible characters
 	{
 		if (t->children[i])
+		// If t has such a child
 		{
 			path[level]=i+'a';
-			wviz(root->children[i], path, ++level);
+			// Add it to the string
+			wviz(root->children[i], path, ++level, return_arr, return_index);
+			// Recursively call wviz on the current node
 		}
 	}
 
 	return return_arr;
+	// Return constructed array of strings
 }
 
 // Print viz

@@ -8,15 +8,21 @@ Made by Marco Harnam Kaisth */
 int is_node(trie_t* t, char* str)
 {
 	trie_t* search=t;
+	// Create a new trie to look through without losing our original pointer
 
 	for (int i = 0; i < strlen(str); i++)
+	// For all chars in the string
 	{
 		int index = str[i]-'a';
+		// Convert the char to an int
 		if (!search->children[index])
 			return 0;
+		// If no such node exists return false
 
 		search=search->children[index];
+		// Continue searching through the trie
 	}
 
 	return (search!=NULL);
+	// If you go all the way through the trie, return true. Else, false.
 }
