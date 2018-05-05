@@ -2,6 +2,9 @@
 Based on the Trie team design document V1.0
 Made by Marco Harnam Kaisth */
 
+#include <string.h>
+#include <stdio.h>
+
 // Leaf visualization
 // Based on https://www.geeksforgeeks.org/trie-display-content/
 // Takes a trie t, an empty string path to fill as it goes doewn the trie
@@ -28,7 +31,7 @@ char** lviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
 		{
 			path[level]=i+'a';
 			// Make the current index of the string whatever char is present
-			lviz(root->children[i], path, ++level, return_arr, return_index);
+			lviz(t->children[i], path, ++level, return_arr, return_index);
 			// Recursively call lviz on the child node
 		}
 	}
@@ -63,7 +66,7 @@ char** wviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
 		{
 			path[level]=i+'a';
 			// Add it to the string
-			wviz(root->children[i], path, ++level, return_arr, return_index);
+			wviz(t->children[i], path, ++level, return_arr, return_index);
 			// Recursively call wviz on the current node
 		}
 	}
