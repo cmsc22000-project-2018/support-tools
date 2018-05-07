@@ -8,14 +8,24 @@
 int exec(char* arg, char* sups[]);
 
 /* Takes an input of supplementary arguments, uses only the first
- * Prints out a visualization
+ * Prints out an exhaustive visualization
+ * Returns 1, -1, or -2 as described above */
+int exec_eviz(char** sups);
+
+/* Takes an input of supplementary arguments, uses only the first
+ * Prints out a leaf visualization
  * Returns 1, -1, or -2 as described above */ 
 int exec_lviz(char** sups);
 
 /* Takes an input of supplementary arguments, uses only the first
- * Prints out a visualization
+ * Prints out a word visualization
  * Returns 1, -1, or -2 as described above */ 
 int exec_wviz(char** sups);
+
+/* Takes an input of supplementary arguments, uses only the first
+ * Prints out a subtree visualization
+ * Returns 1, -1, or -2 as described above */
+int exec_sviz(char** sups);
 
 /* Returns 0, does nothing else*/
 int quit(char** sups);

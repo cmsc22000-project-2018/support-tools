@@ -81,6 +81,50 @@ int exec_wviz(char** sups)
   return 1;
 }
 
+int exec_eviz(char** sups)
+{
+    if (sups[0] == NULL) {
+        return -1;
+    }
+    trie_t* t = get_trie(sups[0]);
+    if (t == NULL){
+        return -1;
+    }
+
+    char* path = "";
+    int level = 0;
+    char* return_array[] = {"test"};
+    int return_index;
+  
+    char** visualization_arr = eviz(t, path, level, return_array, &return_index);
+     
+    print_viz(visualization_arr, &return_index);
+    return 1;
+}
+
+int exec_sviz(char** sups)
+{
+    if (sups[0] == NULL) {
+        return -1;
+    }
+    trie_t* t = get_trie(sups[0]);
+    if (t == NULL) {
+        return -1;
+    }
+    
+    char* input = "input";
+    char* path = "";
+    int level = 0;
+    char* return_array[] = {"test"};
+    int return_index;
+    
+    char** visualization_arr = 
+        sviz(t, input, path, level, return_array, &return_index);
+
+    print_viz(visualization_arr, &return_index);
+    return 1;
+}    
+
 int quit(char** sups){
   return 0;
 }
