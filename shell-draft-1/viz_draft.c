@@ -1,11 +1,22 @@
 /* Based on the Trie team design document V1.0
-Made by Marco Harnam Kaisth */
+Made by Marco Harnam Kaisth
+Edited by Richard Pei */
 
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include "tries.h"
-#include "lviz_wviz_draft.h"
+#include "viz_draft.h"
+
+// See viz_draft.h
+char** eviz(trie_t* t, char path[], int level, char** return_arr, int* return_index)
+{
+    printf("Trie: %s. This is where the exhaustive visualization would be calculated.\n",
+            t -> str);
+    char** to_return = malloc(sizeof(char*));
+    to_return[0] = strdup("This is where the visualization is printed");
+    return to_return;
+}
 
 // Leaf visualization
 // Based on https://www.geeksforgeeks.org/trie-display-content/
@@ -31,6 +42,16 @@ char** wviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
   char** to_return = malloc(sizeof(char*));
   to_return[0] = strdup("This is where the visualization is printed");
   return to_return;
+}
+
+// See viz_draft.h
+char** sviz(trie_t* t, char input[], char path[], int level, char** return_arr, int* return_index)
+{
+    printf("Trie: %s. This is where the subtree visualization would be calculated.\n",
+            t -> str);
+    char** to_return = malloc(sizeof(char*));
+    to_return[0] = strdup("This is where the visualization is printed");
+    return to_return;
 }
 
 // Print viz

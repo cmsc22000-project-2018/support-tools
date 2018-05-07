@@ -22,7 +22,7 @@ int exec_lviz(char** sups);
  * Returns 1, -1, or -2 as described above */ 
 int exec_wviz(char** sups);
 
-/* Takes an input of supplementary arguments, uses only the first
+/* Takes an input of supplementary arguments, uses the first and second
  * Prints out a subtree visualization
  * Returns 1, -1, or -2 as described above */
 int exec_sviz(char** sups);
