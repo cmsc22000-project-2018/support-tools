@@ -44,15 +44,19 @@ trie_t* get_trie(char* index_str);
 const char* inputs = {
   "help",
   "quit",
+  "eviz",
   "lviz",
   "wviz",
+  "sviz",
 };
  
 const int functions = {
   (*help)(char**),
   (*quit)(char**),
+  (*eviz)(char**),
   (*lviz)(char**),
   (*wviz)(char**),
+  (*sviz)(char**),
 };
 
 const int num_features = 6;
