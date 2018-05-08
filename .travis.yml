@@ -1,0 +1,20 @@
+language: c
+
+install: true
+
+group: "stable"
+
+script: echo Travis
+
+stage: build
+
+branches:
+  only:
+    - master
+
+jobs:
+  include:
+    - stage: build
+      script: echo build
+    - stage: test
+      script: echo test
