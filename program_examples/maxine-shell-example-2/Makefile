@@ -2,7 +2,8 @@
 CC = gcc
 CLFAGS = -Wall -Wextra -g
 SRC = main.c
-OBJ = main
+OBJ = shell
+
 INCL = -lreadline
 
 reset: clean all
