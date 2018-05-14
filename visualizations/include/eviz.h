@@ -19,7 +19,7 @@
  *  - level: indicate the current level of the trie as well as
  *           the index of the str to fill
  *  - return_arr: a pointer to the array of strings that return
- *  - return_index: current index of the array
+ *  - return_index: current index of the array, also the size of return_arr
  *
  * Returns:
  *  - 0 if something goes wrong, 1 if everything works
