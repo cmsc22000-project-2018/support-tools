@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <math.h>
-#include "trie.h"
 #include "utils.h"
+#include "../include/trie.h"
 
 /* See trie.h */
 trie_t *new_trie(char current)

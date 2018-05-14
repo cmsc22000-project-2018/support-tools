@@ -1,9 +1,11 @@
 /* Leaf and Word Visualization Sample Algorithm
 Based on the Trie team design document V1.0
-Made by Marco Harnam Kaisth */
+Made by Marco Harnam Kaisth
+Small modification from Hongji Liu*/
 
 #include <string.h>
 #include <stdio.h>
+#include "../include/trie.h"
 
 // Leaf visualization
 // Based on https://www.geeksforgeeks.org/trie-display-content/
@@ -17,9 +19,9 @@ char** lviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
 	{
 		path[level] = '\0';
 		//Set the current index of the string to terminal char
-		return_arr[return_index] = strdup(path);
+		return_arr[*return_index] = strdup(path);
 		//Put the constructed string into the array of strings to be printed
-		*return_index++; 
+		++*return_index;
 		//Increment the current index of said array
 	}
 
@@ -29,7 +31,7 @@ char** lviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
 		if (t->children[i])
 			// If such a child exists
 		{
-			path[level]=i+'a';
+			path[level] = t->children[i]->current;
 			// Make the current index of the string whatever char is present
 			lviz(t->children[i], path, ++level, return_arr, return_index);
 			// Recursively call lviz on the child node
@@ -52,9 +54,9 @@ char** wviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
 	{
 		path[level] = '\0';
 		// Set current char of string to terminating char
-		return_arr[return_index] = strdup(path);
+		return_arr[*return_index] = strdup(path);
 		// Place string in constructed array to be printed
-		*return_index++;
+		++*return_index;
 		// Increment index in said array
 	}
 
@@ -64,7 +66,7 @@ char** wviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
 		if (t->children[i])
 		// If t has such a child
 		{
-			path[level]=i+'a';
+			path[level] = t->children[i]->current;
 			// Add it to the string
 			wviz(t->children[i], path, ++level, return_arr, return_index);
 			// Recursively call wviz on the current node
@@ -76,11 +78,11 @@ char** wviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
 }
 
 // Print viz
-void print_viz(char** to-print, int* num_items)
+void print_viz(char** to_print, int* num_items)
 {
 	for (int i=0; i<*num_items; i++)
 	{
-		print_w_dashes(to-print[i]);
+		print_w_dashes(to_print[i]);
 	}
 }
 
