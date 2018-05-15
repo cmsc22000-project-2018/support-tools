@@ -3,7 +3,7 @@ We based this on the Trea team design document V1.0
 Please also consult our design document for a more thorough elucisdation
 of our visulizations.
 
-Made by Marco Harnam Kaisth and Hongji Li */
+Made by Marco Harnam Kaisth and Hongji Liu */
 
 #include <string.h>
 #include <stdio.h>
@@ -99,7 +99,7 @@ int wviz(trie_t* t, char path[], int level, char** return_arr, int* return_index
 	// Return constructed array of strings
 }
 
-// Written by Hongji Li
+// Written by Hongji Liu
 
 //Visualizes every path in trie t
 int eviz(trie_t* t, char* str, int level, char** return_arr, int* return_index) {
