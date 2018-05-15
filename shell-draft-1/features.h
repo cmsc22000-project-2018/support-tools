@@ -14,6 +14,7 @@ int exec_eviz(char** sups);
 
 /* Takes an input of supplementary arguments, uses only the first
  * Prints out a leaf visualization
+
  * Returns 1, -1, or -2 as described above */ 
 int exec_lviz(char** sups);
 
