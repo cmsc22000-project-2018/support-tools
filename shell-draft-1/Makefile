@@ -1,8 +1,8 @@
 .PHONY: all, clean
 CC = gcc
 CFLAGS = -Wall -g -Wextra 
-SRC = features.c main.c lviz_wviz_draft.c
-IMPL = lviz_wviz_draft.c
+SRC = features.c main.c viz_draft.c
+IMPL = viz_draft.c
 OBJ = shell
 
 all: implementation
