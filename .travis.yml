@@ -1,6 +1,10 @@
 language: c
 
 compiler: gcc
+
+before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y libxml2-dev
     
 install: true
 
@@ -15,7 +19,7 @@ branches:
 jobs:
   include:
     - stage: build
-      script: make -C shell-draft-1/ all
+      script: make -C shell-draft-1/ all -std=c99
     - stage: test
       script: echo testd
     - stage: test
