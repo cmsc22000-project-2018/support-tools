@@ -31,7 +31,7 @@ int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, int* r
      * Gets to the node where the input ends
      */
     for (int j = 0; j < input_size; ++j) {
-        subtrie = &subtrie->children[input[j]];
+        subtrie = subtrie->children[input[j]];
     }
 
     /*
