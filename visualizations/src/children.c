@@ -105,3 +105,28 @@ int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_
 
     return 1;
 }
+
+bool has_children(trie_t *t, char *prefix) {
+
+    if (t == NULL) {
+        return false;
+    }
+
+    size_t input_size = strlen(prefix);
+
+    if (input_size == 0) {
+        return true;
+    }
+
+    trie_t* trie = t;
+
+    for (int i = 0; i < input_size; ++i) {
+        trie = trie->children[prefix[i]];
+        if(trie == NULL) {
+            return false;
+        }
+    }
+
+    return true;
+
+}

@@ -7,6 +7,7 @@
 #ifndef INCLUDE_CHILDREN_H
 #define INCLUDE_CHILDREN_H
 
+#include <stdbool.h>
 #include "trie.h"
 #include "lviz_wviz_draft.h"
 
@@ -45,5 +46,8 @@ int get_children(trie_t* t, char* prefix, char* str, int level, char** return_ar
  *
  */
 int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, int n);
+
+
+bool has_children(trie_t *t, char *prefix);
 
 #endif //INCLUDE_CHILDREN_H
