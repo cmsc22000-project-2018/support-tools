@@ -42,7 +42,7 @@ int is_node(trie_t* t, char* str);
  *  - 0 if something goes wrong, 1 if everything works
  *
  */
-int get_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, int* return_index);
+int get_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, unsigned int* return_index);
 
 /* Get N Children:
  *
@@ -59,7 +59,7 @@ int get_children(trie_t* t, char* prefix, char* str, int level, char** return_ar
  *  - 0 if something goes wrong, 1 if everything works
  *
  */
-int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, int n);
+int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, unsigned int n);
 
 /* Subtree Visualization:
  *
@@ -76,7 +76,7 @@ int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_
  *  - 0 if something goes wrong, 1 if everything works
  *
  */
-int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, int* return_index);
+int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, unsigned int* return_index);
 
 
 /* Word visualization
@@ -92,7 +92,7 @@ int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, int* r
  * Returns:
  *  - 0 if something goes wrong, 1 if everything works
  */
-int lviz(trie_t* t, char path[], int level, char** return_arr, int* return_index);
+int lviz(trie_t* t, char path[], int level, char** return_arr, unsigned int* return_index);
 
 /* Word visualization
  *
@@ -107,7 +107,7 @@ int lviz(trie_t* t, char path[], int level, char** return_arr, int* return_index
  * Returns:
  *  - 0 if something goes wrong, 1 if everything works
  */
-int wviz(trie_t* t, char path[], int level, char** return_arr, int* return_index);
+int wviz(trie_t* t, char path[], int level, char** return_arr, unsigned int* return_index);
 
 /* Exhaustive Visualization:
  *
@@ -134,7 +134,7 @@ int eviz(trie_t* t, char* str, int level, char** return_arr, unsigned int* retur
  * Returns:
    - returns void, but prints to_print to stdout
  */
-void print_viz(char** to_print, int* num_items);
+void print_viz(char** to_print, unsigned int* num_items);
 
 /* Has Children:
  * Parameters:
