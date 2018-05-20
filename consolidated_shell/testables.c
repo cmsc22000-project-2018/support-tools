@@ -11,7 +11,6 @@ trie_t* first_trie()
 {
   trie_t* first = new_trie('a');
   insert_string("and",first);
-  insert_string("do",first);
   insert_string("would",first); 
   return first;
 }

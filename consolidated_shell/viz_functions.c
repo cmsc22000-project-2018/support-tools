@@ -7,6 +7,49 @@
 #include <stdlib.h>
 #include "viz_functions.h"
 
+int eviz(trie_t* t, char* str, int level, char** return_arr, unsigned int* return_index) {
+
+    if (return_arr == NULL) {
+        fprintf(stderr, "eviz: return_arr is NULL");
+        return 0;
+    }
+
+    if (return_index == NULL) {
+        fprintf(stderr, "eviz: return_index is NULL");
+        return 0;
+    }
+
+    /*
+     * Similar to Marco's part as t reaches the end of the
+     * leaf, ends the str with '\0' and copies the str to
+     * return_arr
+     */
+    if (!(has_children(t))) {
+        str[level] = '\0';
+        return_arr[*return_index] = strndup(str, level);
+        ++(*return_index);
+    }
+
+    /*
+     * Slightly different to Marco's part where str[level]
+     * adds the current char in the node of one of its children
+     * and the return_arr must add the str since it is exhaustive
+     * visualization
+     */
+    for (int i = 0; i < 255; i++) {
+
+        if (t->children[i]) {
+            str[level] = t->children[i]->current;
+            return_arr[*return_index] = strdup(str);
+            (*return_index)++;
+            eviz(t->children[i], str, ++level, return_arr, return_index);
+        }
+
+    }
+
+    return 1;
+}
+
 int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, int* return_index) {
 
     if (return_arr == NULL) {
@@ -130,6 +173,7 @@ void print_viz(char** to_print, int* num_items)
     for (int i=0; i<(*num_items); i++)
     {
         print_w_dashes(to_print[i]);
+        printf("\n");
     }
 }
 
@@ -155,51 +199,7 @@ int is_node(trie_t* t, char* str)
     // If you go all the way through the trie, return true. Else, false.
 }
 
-int eviz(trie_t* t, char* str, int level, char** return_arr, unsigned int* return_index) {
 
-    if (return_arr == NULL) {
-        fprintf(stderr, "eviz: return_arr is NULL");
-        return 0;
-    }
-
-    if (return_index == NULL) {
-        fprintf(stderr, "eviz: return_index is NULL");
-        return 0;
-    }
-
-    /*
-     * Similar to Marco's part as t reaches the end of the
-     * leaf, ends the str with '\0' and copies the str to
-     * return_arr
-     */
-    if (!(has_children(t))) {
-        printf("LOOKSLIKEWEMADEIT\n");
-        str[level] = '\0';
-        return_arr[*return_index] = strdup(str);
-        ++(*return_index);
-    }
-
-    /*
-     * Slightly different to Marco's part where str[level]
-     * adds the current char in the node of one of its children
-     * and the return_arr must add the str since it is exhaustive
-     * visualization
-     */
-    for (int i = 0; i < 255; i++) {
-
-        if (t->children[i]) {
-
-            str[level] = t->children[i]->current;
-
-            return_arr[*return_index] = strdup(str);
-
-            eviz(t->children[i], str, ++level, return_arr, ++return_index);
-        }
-
-    }
-
-    return 1;
-}
 
 int get_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, int* return_index) {
 
