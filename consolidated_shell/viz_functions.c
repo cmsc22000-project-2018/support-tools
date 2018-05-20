@@ -2,11 +2,53 @@
  * I have replaced all the tabs with spaces
  * Consolidation by Maxine King, see header file for function sources
  */
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "../include/sviz.h"
+#include "viz_functions.h"
+
+int eviz(trie_t* t, char* str, int level, char** return_arr, unsigned int* return_index) {
+
+    if (return_arr == NULL) {
+        fprintf(stderr, "eviz: return_arr is NULL");
+        return 0;
+    }
+
+    if (return_index == NULL) {
+        fprintf(stderr, "eviz: return_index is NULL");
+        return 0;
+    }
+
+    /*
+     * Similar to Marco's part as t reaches the end of the
+     * leaf, ends the str with '\0' and copies the str to
+     * return_arr
+     */
+    if (!(has_children(t))) {
+        str[level] = '\0';
+        return_arr[*return_index] = strndup(str, level);
+        ++(*return_index);
+    }
+
+    /*
+     * Slightly different to Marco's part where str[level]
+     * adds the current char in the node of one of its children
+     * and the return_arr must add the str since it is exhaustive
+     * visualization
+     */
+    for (int i = 0; i < 255; i++) {
+
+        if (t->children[i]) {
+            str[level] = t->children[i]->current;
+            return_arr[*return_index] = strdup(str);
+            (*return_index)++;
+            eviz(t->children[i], str, ++level, return_arr, return_index);
+        }
+
+    }
+
+    return 1;
+}
 
 int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, int* return_index) {
 
@@ -27,7 +69,7 @@ int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, int* r
     /*
      * Gets to the node where the input ends
      */
-    for (int j = 0; j < input_size; ++j) {
+    for (size_t j = 0; j < input_size; ++j) {
         subtrie = subtrie->children[input[j]];
     }
 
@@ -43,7 +85,7 @@ int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, int* r
      * in eviz
      */
     for (int i = 0; i < *return_index; ++i) {
-        strncat(input, return_arr[i]);
+        strcat(input, return_arr[i]);
         puts(return_arr[i]);
     }
 
@@ -110,14 +152,6 @@ char** wviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
     // Return constructed array of strings
 }
 
-void print_viz(char** to_print, int* num_items)
-{
-    for (int i=0; i<*num_items; i++)
-    {
-        print_w_dashes(to_print[i]);
-    }
-}
-
 // Print an individual string with correct hyphens
 void print_w_dashes(char* str)
 {
@@ -132,6 +166,15 @@ void print_w_dashes(char* str)
     }
 
     printf("%c",str[i]);
+}
+
+void print_viz(char** to_print, int* num_items)
+{
+    for (int i=0; i<(*num_items); i++)
+    {
+        print_w_dashes(to_print[i]);
+        printf("\n");
+    }
 }
 
 int is_node(trie_t* t, char* str)
@@ -156,54 +199,7 @@ int is_node(trie_t* t, char* str)
     // If you go all the way through the trie, return true. Else, false.
 }
 
-int eviz(trie_t* t, char* str, int level, char** return_arr, int* return_index) {
 
-    if (return_arr == NULL) {
-        fprintf(stderr, "eviz: return_arr is NULL");
-        return 0;
-    }
-
-    if (return_index == NULL) {
-        fprintf(stderr, "eviz: return_index is NULL");
-        return 0;
-    }
-
-    /*
-     * Similar to Marco's part as t reaches the end of the
-     * leaf, ends the str with '\0' and copies the str to
-     * return_arr
-     */
-    if (!t->children) {
-
-        str[level] = '\0';
-
-        return_arr[*return_index] = strdup(str);
-
-
-        ++*return_index;
-    }
-
-    /*
-     * Slightly different to Marco's part where str[level]
-     * adds the current char in the node of one of its children
-     * and the return_arr must add the str since it is exhaustive
-     * visualization
-     */
-    for (int i = 0; i < 255; i++) {
-
-        if (t->children[i]) {
-
-            str[level] = t->children[i]->current;
-
-            return_arr[*return_index] = strdup(str + '\0');
-
-            eviz(t->children[i], str, ++level, return_arr, ++return_index);
-        }
-
-    }
-
-    return 1;
-}
 
 int get_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, int* return_index) {
 
@@ -224,7 +220,7 @@ int get_children(trie_t* t, char* prefix, char* str, int level, char** return_ar
     /*
      * Gets to the node where the input ends
      */
-    for (int j = 0; j < input_size; ++j) {
+    for (size_t j = 0; j < input_size; ++j) {
         subtrie = subtrie->children[prefix[j]];
     }
 
@@ -240,7 +236,7 @@ int get_children(trie_t* t, char* prefix, char* str, int level, char** return_ar
      * in wviz
      */
     for (int i = 0; i < *return_index; ++i) {
-        strncat(prefix, return_arr[i]);
+        strcat(prefix, return_arr[i]);
         puts(return_arr[i]);
     }
 
@@ -262,7 +258,7 @@ int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_
     /*
      * Gets to the node where the input ends
      */
-    for (int j = 0; j < input_size; ++j) {
+    for (size_t j = 0; j < input_size; ++j) {
         subtrie = subtrie->children[prefix[j]];
     }
 
@@ -280,7 +276,7 @@ int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_
      * in wviz
      */
     for (int i = 0; i < return_index; ++i) {
-        strncat(prefix, return_arr[i]);
+        strcat(prefix, return_arr[i]);
         puts(return_arr[i]);
     }
 
@@ -300,3 +296,13 @@ int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_
 
     return 1;
 }
+
+//returns 1 if a trie has children, 0 otherwise
+int has_children(trie_t* t){
+  for (int i = 0; i < 256; i++){
+    if ((t->children)[i])
+      return 1;
+  }
+  return 0;
+}
+

@@ -83,7 +83,7 @@ int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, int* r
  *
  * Parameters:
  *  - t: a trie pointer pointed to the head of the tree
- *  - str: an empty string to fill as it goes down the trie
+ *  - path: an empty string to fill as it goes down the trie
  *  - level: indicate the current level of the trie as well as
  *           the index of the str to fill
  *  - return_arr: a pointer to the array of strings that return
@@ -98,7 +98,7 @@ char** lviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
  *
  * Parameters:
  *  - t: a trie pointer pointed to the head of the tree
- *  - str: an empty string to fill as it goes down the trie
+ *  - path: an empty string to fill as it goes down the trie
  *  - level: indicate the current level of the trie as well as
  *           the index of the str to fill
  *  - return_arr: a pointer to the array of strings that return
@@ -123,18 +123,27 @@ char** wviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
  *  - 0 if something goes wrong, 1 if everything works
  *
  */
-int eviz(trie_t* t, char* str, int level, char** return_arr, int* return_index);
+int eviz(trie_t* t, char* str, int level, char** return_arr, unsigned int* return_index);
 
 /* Print Viz:
  *
  * Parameters:
- *  - to-print: an aray of char*s to be printed
+ *  - to_print: an aray of char*s to be printed
  *  - num-items: number of items to be printed
  *
  * Returns:
-   - returns void, but prints to-print to stdout
+   - returns void, but prints to_print to stdout
  */
-void print_viz(char** to-print, int* num_items);
+void print_viz(char** to_print, int* num_items);
+
+/* Has Children:
+ * Parameters:
+ *  - t: a pointer to a trie node
+ *
+ * Returns:
+ *  - 1 if a trie has children, 0 otherwise
+ */
+int has_children(trie_t* t);
 
 #endif
 
