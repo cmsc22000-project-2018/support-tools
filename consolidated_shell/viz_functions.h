@@ -90,9 +90,9 @@ int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, int* r
  *  - return_index: current index of the array, also the size of return_arr
  *
  * Returns:
- *  - A pointer to the array of strings containing an alphabetical list of all leaves in the trie
+ *  - 0 if something goes wrong, 1 if everything works
  */
-char** lviz(trie_t* t, char path[], int level, char** return_arr, int* return_index);
+int lviz(trie_t* t, char path[], int level, char** return_arr, int* return_index);
 
 /* Word visualization
  *
@@ -105,9 +105,9 @@ char** lviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
  *  - return_index: current index of the array, also the size of return_arr
  *
  * Returns:
- *  - A pointer to the array of strings containing an alphabetical list of all words in the trie
+ *  - 0 if something goes wrong, 1 if everything works
  */
-char** wviz(trie_t* t, char path[], int level, char** return_arr, int* return_index);
+int wviz(trie_t* t, char path[], int level, char** return_arr, int* return_index);
 
 /* Exhaustive Visualization:
  *

@@ -1,5 +1,6 @@
 /* Implementation of all files from viz_functions.h
- * I have replaced all the tabs with spaces
+ * I have replaced all the tabs with spaces and made return values consistent
+ * Also, I added a has_children function
  * Consolidation by Maxine King, see header file for function sources
  */
 #include <stdio.h>
@@ -85,16 +86,29 @@ int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, int* r
      * in eviz
      */
     for (int i = 0; i < *return_index; ++i) {
-        strcat(input, return_arr[i]);
-        puts(return_arr[i]);
+        char* full_child = calloc(1,100);
+        strcpy(full_child, input);
+        strcat(full_child, return_arr[i]);
+        strcpy(return_arr[i],full_child);
+        free(full_child);
     }
 
     return 1;
 }
 
-char** lviz(trie_t* t, char path[], int level, char** return_arr, int* return_index)
+int lviz(trie_t* t, char path[], int level, char** return_arr, int* return_index)
 {
-    if (!t->children)
+    if (return_arr == NULL) {
+        fprintf(stderr, "eviz: return_arr is NULL");
+        return 0;
+    }
+
+    if (return_index == NULL) {
+        fprintf(stderr, "eviz: return_index is NULL");
+        return 0;
+    }
+
+    if (!has_children(t))
         // If current node is a leaf
     {
         path[level] = '\0';
@@ -118,12 +132,21 @@ char** lviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
         }
     }
 
-    return return_arr;
-    // Return the array of constructed strings
+    return 1;
 }
 
-char** wviz(trie_t* t, char path[], int level, char** return_arr, int* return_index)
+int wviz(trie_t* t, char path[], int level, char** return_arr, int* return_index)
 {
+    if (return_arr == NULL) {
+        fprintf(stderr, "eviz: return_arr is NULL");
+        return 0;
+    }
+
+    if (return_index == NULL) {
+        fprintf(stderr, "eviz: return_index is NULL");
+        return 0;
+     }
+
     if (t->is_word)
         // If current node is a word
     {
@@ -148,8 +171,7 @@ char** wviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
         }
     }
 
-    return return_arr;
-    // Return constructed array of strings
+    return 1;
 }
 
 // Print an individual string with correct hyphens
