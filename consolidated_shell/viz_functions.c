@@ -2,11 +2,10 @@
  * I have replaced all the tabs with spaces
  * Consolidation by Maxine King, see header file for function sources
  */
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "../include/sviz.h"
+#include "viz_functions.h"
 
 int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, int* return_index) {
 
@@ -27,7 +26,7 @@ int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, int* r
     /*
      * Gets to the node where the input ends
      */
-    for (int j = 0; j < input_size; ++j) {
+    for (size_t j = 0; j < input_size; ++j) {
         subtrie = subtrie->children[input[j]];
     }
 
@@ -43,7 +42,7 @@ int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, int* r
      * in eviz
      */
     for (int i = 0; i < *return_index; ++i) {
-        strncat(input, return_arr[i]);
+        strcat(input, return_arr[i]);
         puts(return_arr[i]);
     }
 
@@ -110,14 +109,6 @@ char** wviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
     // Return constructed array of strings
 }
 
-void print_viz(char** to_print, int* num_items)
-{
-    for (int i=0; i<*num_items; i++)
-    {
-        print_w_dashes(to_print[i]);
-    }
-}
-
 // Print an individual string with correct hyphens
 void print_w_dashes(char* str)
 {
@@ -132,6 +123,14 @@ void print_w_dashes(char* str)
     }
 
     printf("%c",str[i]);
+}
+
+void print_viz(char** to_print, int* num_items)
+{
+    for (int i=0; i<*num_items; i++)
+    {
+        print_w_dashes(to_print[i]);
+    }
 }
 
 int is_node(trie_t* t, char* str)
@@ -224,7 +223,7 @@ int get_children(trie_t* t, char* prefix, char* str, int level, char** return_ar
     /*
      * Gets to the node where the input ends
      */
-    for (int j = 0; j < input_size; ++j) {
+    for (size_t j = 0; j < input_size; ++j) {
         subtrie = subtrie->children[prefix[j]];
     }
 
@@ -240,7 +239,7 @@ int get_children(trie_t* t, char* prefix, char* str, int level, char** return_ar
      * in wviz
      */
     for (int i = 0; i < *return_index; ++i) {
-        strncat(prefix, return_arr[i]);
+        strcat(prefix, return_arr[i]);
         puts(return_arr[i]);
     }
 
@@ -262,7 +261,7 @@ int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_
     /*
      * Gets to the node where the input ends
      */
-    for (int j = 0; j < input_size; ++j) {
+    for (size_t j = 0; j < input_size; ++j) {
         subtrie = subtrie->children[prefix[j]];
     }
 
@@ -280,7 +279,7 @@ int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_
      * in wviz
      */
     for (int i = 0; i < return_index; ++i) {
-        strncat(prefix, return_arr[i]);
+        strcat(prefix, return_arr[i]);
         puts(return_arr[i]);
     }
 
