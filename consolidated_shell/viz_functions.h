@@ -123,7 +123,7 @@ char** wviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
  *  - 0 if something goes wrong, 1 if everything works
  *
  */
-int eviz(trie_t* t, char* str, int level, char** return_arr, int* return_index);
+int eviz(trie_t* t, char* str, int level, char** return_arr, unsigned int* return_index);
 
 /* Print Viz:
  *
@@ -135,6 +135,15 @@ int eviz(trie_t* t, char* str, int level, char** return_arr, int* return_index);
    - returns void, but prints to_print to stdout
  */
 void print_viz(char** to_print, int* num_items);
+
+/* Has Children:
+ * Parameters:
+ *  - t: a pointer to a trie node
+ *
+ * Returns:
+ *  - 1 if a trie has children, 0 otherwise
+ */
+int has_children(trie_t* t);
 
 #endif
 

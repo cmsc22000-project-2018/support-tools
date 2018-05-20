@@ -127,7 +127,7 @@ void print_w_dashes(char* str)
 
 void print_viz(char** to_print, int* num_items)
 {
-    for (int i=0; i<*num_items; i++)
+    for (int i=0; i<(*num_items); i++)
     {
         print_w_dashes(to_print[i]);
     }
@@ -155,7 +155,7 @@ int is_node(trie_t* t, char* str)
     // If you go all the way through the trie, return true. Else, false.
 }
 
-int eviz(trie_t* t, char* str, int level, char** return_arr, int* return_index) {
+int eviz(trie_t* t, char* str, int level, char** return_arr, unsigned int* return_index) {
 
     if (return_arr == NULL) {
         fprintf(stderr, "eviz: return_arr is NULL");
@@ -172,14 +172,11 @@ int eviz(trie_t* t, char* str, int level, char** return_arr, int* return_index) 
      * leaf, ends the str with '\0' and copies the str to
      * return_arr
      */
-    if (!t->children) {
-
+    if (!(has_children(t))) {
+        printf("LOOKSLIKEWEMADEIT\n");
         str[level] = '\0';
-
         return_arr[*return_index] = strdup(str);
-
-
-        ++*return_index;
+        ++(*return_index);
     }
 
     /*
@@ -194,7 +191,7 @@ int eviz(trie_t* t, char* str, int level, char** return_arr, int* return_index) 
 
             str[level] = t->children[i]->current;
 
-            return_arr[*return_index] = strdup(str + '\0');
+            return_arr[*return_index] = strdup(str);
 
             eviz(t->children[i], str, ++level, return_arr, ++return_index);
         }
@@ -299,3 +296,13 @@ int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_
 
     return 1;
 }
+
+//returns 1 if a trie has children, 0 otherwise
+int has_children(trie_t* t){
+  for (int i = 0; i < 256; i++){
+    if ((t->children)[i])
+      return 1;
+  }
+  return 0;
+}
+
