@@ -1,5 +1,5 @@
 /*
- * Get Children functions
+ * Children functions
  * Modified from Subtree Visualization
  * Created by Hongji Liu
  */
@@ -12,42 +12,43 @@
 #include "lviz_wviz_draft.h"
 
 /*
- * Get Children:
+ * Get all the children from a trie
  *
  * Parameters:
  *  - t: a trie pointer pointed to the head of the tree
  *  - prefix: an input string
- *  - str: an empty string to fill as it goes down the trie
- *  - level: indicate the current level of the trie as well as
- *           the index of the str to fill
- *  - return_arr: a pointer to the array of strings that return
- *  - return_index: current index of the array, also the size of return_arr
  *
  * Returns:
- *  - 0 if something goes wrong, 1 if everything works
+ *  - an array of string that contains the children
  *
  */
-int get_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, int* return_index);
+char** get_children(trie_t* t, char* prefix);
 
 /*
- * Get N Children:
+ * Get n number of children from a trie
  *
  * Parameters:
  *  - t: a trie pointer pointed to the head of the tree
  *  - prefix: an input string
- *  - str: an empty string to fill as it goes down the trie
- *  - level: indicate the current level of the trie as well as
- *           the index of the str to fill
- *  - return_arr: a pointer to the array of strings that return
- *  - n: number of children required
+ *  - n: number of children wanted
  *
  * Returns:
- *  - 0 if something goes wrong, 1 if everything works
+ *  - an array of string that contains the children
  *
  */
-int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, int n);
+char** get_n_children(trie_t* t, char* prefix, int n);
 
-
+/*
+ * check if a child with certain prefix exists in the trie
+ *
+ * Parameters:
+ *  - t: a trie pointer pointed to the head of the tree
+ *  - prefix: an input string
+ *
+ * Returns:
+ *  - true if the child exists, false if doesn't
+ *
+ */
 bool has_children(trie_t *t, char *prefix);
 
 #endif //INCLUDE_CHILDREN_H

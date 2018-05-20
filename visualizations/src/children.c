@@ -10,16 +10,10 @@
 #include "../include/children.h"
 
 // see children.h
-int get_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, int* return_index) {
+char** get_children(trie_t* t, char* prefix) {
 
-    if (return_arr == NULL) {
-        fprintf(stderr, "eviz: return_arr is NULL");
-        return 0;
-    }
-
-    if (return_index == NULL) {
-        fprintf(stderr, "eviz: return_index is NULL");
-        return 0;
+    if (t == NULL) {
+        return NULL;
     }
 
     size_t input_size = strlen(prefix);
@@ -33,31 +27,42 @@ int get_children(trie_t* t, char* prefix, char* str, int level, char** return_ar
         subtrie = subtrie->children[prefix[j]];
     }
 
+/*
+ *  - str: an empty string to fill as it goes down the trie
+ *  - level: indicate the current level of the trie as well as
+ *           the index of the str to fill
+ *  - return_arr: a pointer to the array of strings that return
+ *  - return_index: current index of the array, also the size of return_arr
+*/
+    int level = 0;
+    char** return_arr = malloc(500 * 500 * sizeof(char));
+    int return_index = 0;
+    char* str = "";
+
     /*
      * Calls wviz to add the children of the string to
      * return_arr
      */
-    wviz(subtrie, str, level, return_arr, return_index);
+    wviz(subtrie, str, level, return_arr, &return_index);
 
     /*
      * Add the input string to the front of each
      * string in the return_arr since it is left off
      * in wviz
      */
-    for (int i = 0; i < *return_index; ++i) {
+    for (int i = 0; i < return_index; ++i) {
         strncat(prefix, return_arr[i]);
         puts(return_arr[i]);
     }
 
-    return 1;
+    return return_arr;
 }
 
 // see children.h
-int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, int n) {
+char** get_n_children(trie_t* t, char* prefix, int n) {
 
-    if (return_arr == NULL) {
-        fprintf(stderr, "eviz: return_arr is NULL");
-        return 0;
+    if (t == NULL) {
+        return NULL;
     }
 
     size_t input_size = strlen(prefix);
@@ -71,7 +76,17 @@ int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_
         subtrie = subtrie->children[prefix[j]];
     }
 
+/*
+ *  - str: an empty string to fill as it goes down the trie
+ *  - level: indicate the current level of the trie as well as
+ *           the index of the str to fill
+ *  - return_arr: a pointer to the array of strings that return
+ *  - return_index: current index of the array, also the size of return_arr
+ */
+    int level = 0;
+    char** return_arr = malloc(500 * 500 * sizeof(char));
     int return_index = 0;
+    char* str = "";
 
     /*
      * Calls wviz to add the children of the string to
