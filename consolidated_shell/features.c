@@ -26,7 +26,11 @@ struct command features[] = {
                                 {"wviz", exec_wviz, "for a word visualization\n"
                                     "     - need to use with a number to represent the index of the trie you're visualizing"},
                                 {"sviz", exec_sviz, "for a subtree visualization\n"
-                                    "     - need to use with a number to represent the index of the trie you're visualizing\n     - and an input string"}
+                                    "     - need to use with a number to represent the index of the trie you're visualizing\n     - and an input string (NOT in quotes)"},
+                                {"get_children", exec_get_children, "to see children\n"
+                                    "     - need to use with a number to represent the index of the trie you're getting children from\n and an input string(NOT in quotes)"},
+                                {"get_n_children", exec_get_n_children, "to see n children\n"
+                                    "     - need to use with a number to represent the index of the trie you're getting children from\n - and an input string (not in quotes)\n - and a number n"},
                                      };
 
 /* Number of features */
@@ -39,17 +43,17 @@ int exec(char* arg, char* sups[])
       return features[i].func(sups);
     }
   }
-  return -1;
+  return 0;
 }
 
 int exec_general_viz(char** sups, char which_viz)
 {
   if (sups[0] == NULL){
-    return -1;
+    return 0;
   }
   trie_t* t = get_trie(sups[0]) ;
   if (t == NULL){
-    return -1;
+    return 0;
   }
 
   char* path = calloc(1000,1);
@@ -69,6 +73,14 @@ int exec_general_viz(char** sups, char which_viz)
   } else if (which_viz == 's') {
     char* input = sups[1];
     success = sviz(t, input, path, level, return_array, return_index);
+  } else if (which_viz == 'c') {
+    char* input = sups[1];
+    success = get_children(t, input, path, level, return_array, return_index);
+  } else if (which_viz == 'n') {
+    char* input = sups[1];
+    int n = atoi(sups[2]);
+    *return_index = n;
+    success = get_n_children(t, input, path, level, return_array, n);
   }
   
   print_viz(return_array, return_index);
@@ -93,14 +105,33 @@ int exec_wviz(char** sups)
 int exec_sviz(char** sups)
 {
   if (sups[1] == NULL){
-    return -1;
+    return 0;
   }
   return exec_general_viz(sups, 's');
 }
 
+int exec_get_children(char** sups)
+{
+  if (sups[1] == NULL){
+    return 0;
+  }
+  return exec_general_viz(sups, 'c');
+}
+
+int exec_get_n_children(char** sups)
+{
+  if (sups[1] == NULL){
+    return 0;
+  }
+  if (sups[2] == NULL){
+    return 0;
+  }
+  return exec_general_viz(sups, 'n');
+}
+
 int quit(char** sups){
   sups++;
-  return 0;
+  return -2;
 }
 
 int help(char** sups){

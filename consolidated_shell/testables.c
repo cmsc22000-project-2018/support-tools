@@ -12,7 +12,6 @@ trie_t* first_trie() {
   insert_string("and",first);
   insert_string("would",first); 
   insert_string("wood",first); 
-  add_node('q',first);
   return first;
 }
 
