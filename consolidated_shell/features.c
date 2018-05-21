@@ -32,7 +32,6 @@ struct command features[] = {
 /* Number of features */
 int num_features = sizeof(features) / sizeof(struct command);
 
-
 int exec(char* arg, char* sups[])
 {
   for (int i = 0; i < num_features; i++){
@@ -53,24 +52,27 @@ int exec_general_viz(char** sups, char which_viz)
     return -1;
   }
 
-  char* path = "";
-  char* input = "and";
+  char* path = calloc(1000,1);
   int level = 0;
-  char** return_array;
-  int return_index;
-  char** visualization_arr;
+  unsigned int* return_index = malloc(sizeof(unsigned int));
+  (*return_index) = 0;
+  char** return_array = malloc(1000*sizeof(char*));
 
-  if (which_viz == 'e')
-    return eviz(t, path, level, return_array, &return_index);
-  else if (which_viz == 'l')
-    visualization_arr = lviz(t, path, level, return_array, &return_index);
-  else if (which_viz == 'w')
-    visualization_arr = wviz(t, path, level, return_array, &return_index);
-  else if (which_viz == 's')
-    return sviz(t, input, path, level, return_array, &return_index);
+  int success;
+
+  if (which_viz == 'e') {
+    success = eviz(t, path, level, return_array, return_index);
+  } else if (which_viz == 'l') {
+    success = lviz(t, path, level, return_array, return_index);
+  } else if (which_viz == 'w') {
+    success = wviz(t, path, level, return_array, return_index);
+  } else if (which_viz == 's') {
+    char* input = sups[1];
+    success = sviz(t, input, path, level, return_array, return_index);
+  }
   
-  print_viz(visualization_arr, &return_index);
-  return 1; 
+  print_viz(return_array, return_index);
+  return success; 
 }
 
 int exec_lviz(char** sups)
@@ -90,11 +92,14 @@ int exec_wviz(char** sups)
 
 int exec_sviz(char** sups)
 {
+  if (sups[1] == NULL){
+    return -1;
+  }
   return exec_general_viz(sups, 's');
 }
 
 int quit(char** sups){
-  printf("%s\n",sups[0]);
+  sups++;
   return 0;
 }
 
