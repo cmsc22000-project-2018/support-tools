@@ -27,10 +27,10 @@ struct command features[] = {
                                     "     - need to use with a number to represent the index of the trie you're visualizing"},
                                 {"sviz", exec_sviz, "for a subtree visualization\n"
                                     "     - need to use with a number to represent the index of the trie you're visualizing\n     - and an input string (NOT in quotes)"},
-                                {"get_children", exec_get_children, "to see children\n"
+                                {"get_children", exec_get_children, "to see children of a node\n"
                                     "     - need to use with a number to represent the index of the trie you're getting children from\n and an input string(NOT in quotes)"},
-                                {"get_n_children", exec_get_n_children, "to see n children\n"
-                                    "     - need to use with a number to represent the index of the trie you're getting children from\n - and an input string (not in quotes)\n - and a number n"},
+                                {"get_n_children", exec_get_n_children, "to see n children of a node\n"
+                                    "     - need to use with a number to represent the index of the trie you're getting children from, an input string (not in quotes), and a number n"},
                                      };
 
 /* Number of features */
