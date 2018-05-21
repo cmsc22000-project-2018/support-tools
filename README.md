@@ -105,10 +105,10 @@ _API (These simply call the API for their functionality, and are written by thei
 Note: the print_viz functions will call the viz functions so that the user only has to call the print_viz functions. We will seperate the viz functions and include them in the .h file for testing purposes.
 
 _Functions written from scratch:_
-+ char** eviz(trie_t*, char path[], int level, char** return_arr, int* return_index);
-+ char** lviz(trie_t*, char path[], int level, char** return_arr, int* return_index);
-+ char** wviz(trie_t*, char path[], int level, char** return_arr, int* return_index);
-+ char** sviz(trie_t*, char input[], char path[], int level, char** return_arr, int* return_index);
++ int eviz(trie_t*, char path[], int level, char** return_arr, int* return_index);
++ int lviz(trie_t*, char path[], int level, char** return_arr, int* return_index);
++ int wviz(trie_t*, char path[], int level, char** return_arr, int* return_index);
++ int sviz(trie_t*, char input[], char path[], int level, char** return_arr, int* return_index);
 + trie_t* trace(trie_t*, node_t*);
 + trie_t* isolate_subtree(trie_t*, node_t*);
 
@@ -133,19 +133,19 @@ To enter the shell, the user will input:
     ./trie-viz [file]
 
 From there they will see
-
+```
     Welcome to the Trie-Viz shell!
-Please either load in a trie or create a new one.
-
+    Please either load in a trie or create a new one.
+```
 
 Here, they will be able to use the commands:
 
 + h - to view all commands possible
 + new - to create a new trie
 + import [file] - to import a trie
-+ print_eviz - exhaustive visualization
-+ print_lviz - leaf visualization
-+ print_wviz - word visualization
-+ print_sviz [node] - sub tree visualization
++ eviz - exhaustive visualization
++ lviz - leaf visualization
++ wviz - word visualization
++ sviz [node] - sub tree visualization
 + add [node] - add a node to the given tree
 + remove [node] - removes node from given tree
