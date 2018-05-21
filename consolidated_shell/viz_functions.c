@@ -1,5 +1,6 @@
 /* Implementation of all files from viz_functions.h
- * I have replaced all the tabs with spaces
+ * I have replaced all the tabs with spaces and made return values consistent
+ * Also, I added a has_children function
  * Consolidation by Maxine King, see header file for function sources
  */
 #include <stdio.h>
@@ -50,7 +51,7 @@ int eviz(trie_t* t, char* str, int level, char** return_arr, unsigned int* retur
     return 1;
 }
 
-int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, int* return_index) {
+int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, unsigned int* return_index) {
 
     if (return_arr == NULL) {
         fprintf(stderr, "eviz: return_arr is NULL");
@@ -84,17 +85,30 @@ int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, int* r
      * string in the return_arr since it is left off
      * in eviz
      */
-    for (int i = 0; i < *return_index; ++i) {
-        strcat(input, return_arr[i]);
-        puts(return_arr[i]);
+    for (unsigned int i = 0; i < *return_index; ++i) {
+        char* full_child = calloc(1,100);
+        strcpy(full_child, input);
+        strcat(full_child, return_arr[i]);
+        strcpy(return_arr[i],full_child);
+        free(full_child);
     }
 
     return 1;
 }
 
-char** lviz(trie_t* t, char path[], int level, char** return_arr, int* return_index)
+int lviz(trie_t* t, char path[], int level, char** return_arr, unsigned int* return_index)
 {
-    if (!t->children)
+    if (return_arr == NULL) {
+        fprintf(stderr, "eviz: return_arr is NULL");
+        return 0;
+    }
+
+    if (return_index == NULL) {
+        fprintf(stderr, "eviz: return_index is NULL");
+        return 0;
+    }
+
+    if (!has_children(t))
         // If current node is a leaf
     {
         path[level] = '\0';
@@ -118,12 +132,21 @@ char** lviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
         }
     }
 
-    return return_arr;
-    // Return the array of constructed strings
+    return 1;
 }
 
-char** wviz(trie_t* t, char path[], int level, char** return_arr, int* return_index)
+int wviz(trie_t* t, char path[], int level, char** return_arr, unsigned int* return_index)
 {
+    if (return_arr == NULL) {
+        fprintf(stderr, "eviz: return_arr is NULL");
+        return 0;
+    }
+
+    if (return_index == NULL) {
+        fprintf(stderr, "eviz: return_index is NULL");
+        return 0;
+     }
+
     if (t->is_word)
         // If current node is a word
     {
@@ -148,8 +171,7 @@ char** wviz(trie_t* t, char path[], int level, char** return_arr, int* return_in
         }
     }
 
-    return return_arr;
-    // Return constructed array of strings
+    return 1;
 }
 
 // Print an individual string with correct hyphens
@@ -168,9 +190,9 @@ void print_w_dashes(char* str)
     printf("%c",str[i]);
 }
 
-void print_viz(char** to_print, int* num_items)
+void print_viz(char** to_print, unsigned int* num_items)
 {
-    for (int i=0; i<(*num_items); i++)
+    for (unsigned int i=0; i<(*num_items); i++)
     {
         print_w_dashes(to_print[i]);
         printf("\n");
@@ -182,7 +204,7 @@ int is_node(trie_t* t, char* str)
     trie_t* search=t;
     // Create a new trie to look through without losing our original pointer
 
-    for (int i = 0; i < strlen(str); i++)
+    for (size_t i = 0; i < strlen(str); i++)
     // For all chars in the string
     {
         int index = str[i]-'a';
@@ -201,7 +223,7 @@ int is_node(trie_t* t, char* str)
 
 
 
-int get_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, int* return_index) {
+int get_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, unsigned int* return_index) {
 
     if (return_arr == NULL) {
         fprintf(stderr, "eviz: return_arr is NULL");
@@ -235,7 +257,7 @@ int get_children(trie_t* t, char* prefix, char* str, int level, char** return_ar
      * string in the return_arr since it is left off
      * in wviz
      */
-    for (int i = 0; i < *return_index; ++i) {
+    for (unsigned int i = 0; i < *return_index; ++i) {
         strcat(prefix, return_arr[i]);
         puts(return_arr[i]);
     }
@@ -244,7 +266,7 @@ int get_children(trie_t* t, char* prefix, char* str, int level, char** return_ar
 }
 
 // see children.h
-int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, int n) {
+int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, unsigned int n) {
 
     if (return_arr == NULL) {
         fprintf(stderr, "eviz: return_arr is NULL");
@@ -262,7 +284,7 @@ int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_
         subtrie = subtrie->children[prefix[j]];
     }
 
-    int return_index = 0;
+    unsigned int return_index = 0;
 
     /*
      * Calls wviz to add the children of the string to
@@ -275,7 +297,7 @@ int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_
      * string in the return_arr since it is left off
      * in wviz
      */
-    for (int i = 0; i < return_index; ++i) {
+    for (unsigned int i = 0; i < return_index; ++i) {
         strcat(prefix, return_arr[i]);
         puts(return_arr[i]);
     }
@@ -288,7 +310,7 @@ int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_
      */
     if (return_index > n) {
         char* new_arr[n];
-        for (int i = 0; i < n; ++i) {
+        for (unsigned int i = 0; i < n; ++i) {
             new_arr[i] = return_arr[i];
         }
         return_arr = new_arr;
