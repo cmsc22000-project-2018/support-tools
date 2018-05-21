@@ -36,7 +36,7 @@ int main(){
      char* input = readline("> ");
      run = parse(input);
   }
-  printf("exited\n");
+  printf("Exited.\n");
   return 0;
 }
 
