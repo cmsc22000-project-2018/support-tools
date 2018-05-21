@@ -3,20 +3,21 @@
 */
 
 #include <stdlib.h>
+#include <string.h>
 #include <assert.h>
 #include <math.h>
-#include "utils.h"
 #include "../include/trie.h"
+#include "utils.h"
 
 /* See trie.h */
 trie_t *new_trie(char current)
 {
     trie_t *t = calloc(1,sizeof(trie_t));
-    
+
     if (t == NULL){
         error("Could not allocate memory for trie_t");
         return NULL;
-    } 
+    }
 
     t->current = current;
 
@@ -32,7 +33,6 @@ trie_t *new_trie(char current)
     return t;
 }
 
-/* See trie.h */
 int trie_free(trie_t *t)
 {
     assert( t != NULL);
@@ -46,8 +46,6 @@ int trie_free(trie_t *t)
     return 0;
 }
 
-
-/* See trie.h */
 int add_node(char current, trie_t *t)
 {
     assert( t != NULL);
@@ -57,11 +55,10 @@ int add_node(char current, trie_t *t)
     if (t->children[c] == NULL)
         t->children[c] = new_trie(current);
 
-    return 0;  
+    return 0;
 
 }
 
-/* See trie.h */
 int insert_string(char *word, trie_t *t)
 {
     assert(t!=NULL);
@@ -79,8 +76,34 @@ int insert_string(char *word, trie_t *t)
             error("Fail to add_node");
             return 1;
         }
-        
+
         word++;
         return insert_string(word, t->children[(unsigned)curr]);
     }
+}
+
+int trie_search(char* word, trie_t *t)
+{
+    int len;
+    trie_t* curr;
+    trie_t** next;
+
+    len = strlen(word);
+    curr = t;
+    next = t->children;
+
+    for (int i=0; i<len; i++) {
+        int j = (int) word[i];
+        curr = next[j];
+
+        if (curr == NULL)
+            return NOT_IN_TRIE;
+
+        next = next[j]->children;
+    }
+
+    if (curr->is_word == 1)
+        return IN_TRIE;
+
+    return PARTIAL_IN_TRIE;
 }
