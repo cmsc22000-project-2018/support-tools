@@ -1,14 +1,16 @@
-# Purpose
+# CS220 - Support Tools
+
+## Purpose
 A tool which, when given a trie, will print out a visualization of the trie for debugging purposes.
 
-# Method
+## Method
 Given a dictionary stored in a trie, we will use the shell to print out representations of the trie in alphabetical order. There will be four different types of visualizations.
 
-## Exhaustive Visualization
+### Exhaustive Visualization
 The first will be exhaustive and print out all possible paths
-### Use Cases
+#### Use Cases
 Debugging the flow of a trie
-### Example
+#### Example
 ***
 b
 
@@ -27,11 +29,11 @@ b-e-t-t-e-r
 b-e-t-t-e-r-s
 ***
 
-## Leaf Visualization
+### Leaf Visualization
 The second visualization will print out each leaf of the trie
-### Use Cases:
+#### Use Cases:
 Debugging how extensive the words the trie contains is
-### Examples:
+#### Examples:
 ***
 b-e-t-t-e-r-e-d
 
@@ -40,11 +42,11 @@ b-e-t-t-e-r-m-e-n-t
 b-e-t-t-e-r-s
 ***
 
-## Word Visualization
+### Word Visualization
 The third visualization will print out every word in the trie
-### Use Cases:
+#### Use Cases:
 Debugging whether words are correctly counted as words and not strings
-### Example:
+#### Example:
 ***
 b-e-t
 
@@ -57,11 +59,11 @@ b-e-t-t-e-r-s
 b-e-t-t-e-r-m-e-n-t
 ***
 
-## Subtree Visualization
+### Subtree Visualization
 The fourth visualization will take a string (not necessarily a word) and print all of its children
-### Use Cases:
+#### Use Cases:
 Debugging spelling or whether a specific word has been misspelled.
-### Examples:
+#### Examples:
 ***
 input:
 
@@ -124,7 +126,7 @@ _trace_ - This function takes a node and traces the path from that node to the h
 
 _isolate_subtree_ - This will take a trie and a node and output a pointer to a subtree with the given node as its head and all child entries as in the original tree.
 
-## Interface
+### Interface
 
 To enter the shell, the user will input:
 
