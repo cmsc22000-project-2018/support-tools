@@ -1,34 +1,44 @@
 #include "trie.h"
 
 /* When given the function and its arguments, excecutes the relevant function
- * Returns 0 if the input is "quit"
+ * Returns -2 if the input is "quit"
  * Returns 1 if the input is not "quit" but is valid and successfully excecuted
- * Returns -1 if something goes wrong due to bad input
- * Returns -2 if something goes wrong for internal reasons */
+ * Returns 0 if something goes wrong due to bad input
+ * Returns -1 if something goes wrong for internal reasons */
 int exec(char* arg, char* sups[]);
 
 /* Takes an input of supplementary arguments, uses only the first
  * Prints out an exhaustive visualization
- * Returns 1, -1, or -2 as described above */
+ * Returns 1, 0, or -1 as described above */
 int exec_eviz(char** sups);
 
 /* Takes an input of supplementary arguments, uses only the first
  * Prints out a leaf visualization
 
- * Returns 1, -1, or -2 as described above */ 
+ * Returns 1, 0, or -1 as described above */ 
 int exec_lviz(char** sups);
 
 /* Takes an input of supplementary arguments, uses only the first
  * Prints out a word visualization
- * Returns 1, -1, or -2 as described above */ 
+ * Returns 1, 0, or -1 as described above */ 
 int exec_wviz(char** sups);
 
 /* Takes an input of supplementary arguments, uses the first and second
  * Prints out a subtree visualization
- * Returns 1, -1, or -2 as described above */
+ * Returns 1, 0, or -1 as described above */
 int exec_sviz(char** sups);
 
-/* Returns 0, does nothing else*/
+/* Takes an input of supplementary arguments, uses the first and second
+ * Prints out children of a node
+ * Returns 1, 0, or -1 as described above */
+int exec_get_children(char** sups);
+
+/* Takes an input of supplementary arguments, uses the first, second, and third
+ * Prints out the first n children of a node
+ * Returns 1, 0, or -1 as described above */
+int exec_get_n_children(char** sups);
+
+/* Returns -2, does nothing else*/
 int quit(char** sups);
 
 /* Prints help text, returns 1 always */

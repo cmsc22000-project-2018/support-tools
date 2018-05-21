@@ -21,10 +21,10 @@ int parse(char* input){
   }
 
   int final = exec(arg, sups);
-  if (final == -1)
+  if (final == 0)
     printf("Invalid input; please try again.\n"
            "For a list of commands, type help\n");
-  else if (final == -2)
+  else if (final == -1)
     printf("Program error - please try again\n");
   return final;
 }
@@ -32,7 +32,7 @@ int parse(char* input){
 
 int main(){
   int run = 1;
-  while (run){
+  while (run != -2){
      char* input = readline("> ");
      run = parse(input);
   }
