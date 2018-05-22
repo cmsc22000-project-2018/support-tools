@@ -134,8 +134,8 @@ To enter the shell, the user will input:
 
 From there they will see
 ```
-    Welcome to the Trie-Viz shell!
-    Please either load in a trie or create a new one.
+Welcome to the Trie-Viz shell!
+Please either load in a trie or create a new one.
 ```
 
 Here, they will be able to use the commands:
