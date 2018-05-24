@@ -13,11 +13,11 @@
 trie_t *new_trie(char current)
 {
     trie_t *t = calloc(1,sizeof(trie_t));
-
+    
     if (t == NULL){
         error("Could not allocate memory for trie_t");
         return NULL;
-    }
+    } 
 
     t->current = current;
 
@@ -55,7 +55,7 @@ int add_node(char current, trie_t *t)
     if (t->children[c] == NULL)
         t->children[c] = new_trie(current);
 
-    return 0;
+    return 0;  
 
 }
 
@@ -76,7 +76,7 @@ int insert_string(char *word, trie_t *t)
             error("Fail to add_node");
             return 1;
         }
-
+        
         word++;
         return insert_string(word, t->children[(unsigned)curr]);
     }
@@ -102,7 +102,7 @@ int trie_search(char* word, trie_t *t)
         next = next[j]->children;
     }
 
-    if (curr->is_word == 1)
+    if (curr->is_word == 1) 
         return IN_TRIE;
 
     return PARTIAL_IN_TRIE;
