@@ -135,7 +135,6 @@ int quit(char** sups){
 }
 
 int help(char** sups){
-  printf("sups %s,%s\n",sups[0],sups[1]);
   int argisprint;
   if (sups[0] == NULL){
      printf("This tool provides a set of commands to visualize a trie.\n"
