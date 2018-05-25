@@ -28,7 +28,5 @@ every node, every everything
 help all-nodes
 help only-leaves
 help only-words
-help only-leaves prefix
-help only-words prefix
-help n-completions = help n-completions prefix
+help n-completions 
 
