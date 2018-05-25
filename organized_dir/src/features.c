@@ -135,9 +135,12 @@ int quit(char** sups){
 }
 
 int help(char** sups){
-  if (sups[1] == NULL){
+/*  if (sups[1] == NULL){
       full_help();
   }
+  else if (sups[1] == "all-nodes"){
+*/
+  sups++;     
   for (int i = 0; i < num_features; i++){
     printf("%s - %s\n", features[i].command, features[i].help_text);
   }
