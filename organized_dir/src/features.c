@@ -135,7 +135,9 @@ int quit(char** sups){
 }
 
 int help(char** sups){
-  sups++;
+  if (sups[1] == NULL){
+      full_help();
+  }
   for (int i = 0; i < num_features; i++){
     printf("%s - %s\n", features[i].command, features[i].help_text);
   }

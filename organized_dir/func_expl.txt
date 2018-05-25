@@ -1,5 +1,5 @@
 1. print <trie> 
-1. print <trie> all
+1. print <trie> all-nodes
 - you give a trie key name
 - it grabs the trie from API
 - it does "eviz" (exhaustive)
@@ -21,5 +21,14 @@ every node, every everything
 5. print <trie> only-leaves [prefix]
 - lviz with a prefix
 
-6. nCompletions <prefix> 
+6. n-completions <prefix> n
 - get_n_children (prefix)
+
+
+help all-nodes
+help only-leaves
+help only-words
+help only-leaves prefix
+help only-words prefix
+help n-completions = help n-completions prefix
+
