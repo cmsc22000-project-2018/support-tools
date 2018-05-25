@@ -148,7 +148,7 @@ int help(char** sups){
             "all-nodes\t prints out all nodes of the trie\n"
             "only-words\t only prints out valid words of the trie\n"
             "only-leaves\t only prints out the leaves of the trie\n"
-            "Type 'help --[option]' for more information on each option.\n\n"
+            "Type 'help [option]' for more information on each option.\n\n"
             "Prefix:\n"
             "Include the prefix in a trie in order to print out only the subtrie under that prefix.\n");
   } else {
