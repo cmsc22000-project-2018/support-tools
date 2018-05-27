@@ -135,10 +135,72 @@ int quit(char** sups){
 }
 
 int help(char** sups){
-  sups++;
-  for (int i = 0; i < num_features; i++){
-    printf("%s - %s\n", features[i].command, features[i].help_text);
+  int argisprint;
+  if (sups[0] == NULL){
+     printf("This tool provides a set of commands to visualize a trie.\n"
+            "The function takes in a main command, print, as well as a trie to be printed.\n"
+            "Additional arguments can be added in order to specify types of visualizations and to see certain subtries.\n"
+            "Usage: print <trie> [option] [prefix]\n"
+            "Visualize trie using either all-nodes, only-words, or only-leaves OPTION. If no prefix is specified, the entire trie will be visualized.\n"
+            "Example: print trie1 only-words 'ab'\n\n"
+            "Options:\n"
+            "all-nodes\t prints out all nodes of the trie\n"
+            "only-words\t only prints out valid words of the trie\n"
+            "only-leaves\t only prints out the leaves of the trie\n"
+            "Type 'help [option]' for more information on each option.\n\n"
+            "Prefix:\n"
+            "Include the prefix in a trie in order to print out only the subtrie under that prefix.\n");
+  } else {
+    argisprint = !strcmp(sups[0],"print") ? 1 : 0;
+    if ((!strcmp(sups[0],"all-nodes"))||(argisprint&&(!strcmp(sups[1],"all-nodes")))){
+      printf("To see all the nodes from a trie, type:\n"
+             "'print <trie>' or 'print <trie> all-nodes' where trie is the key of the trie you're printing\n"
+             "This will show an alphabetical visualization of every node in your trie\n"
+             "For example, the trie 'trie-ex' contains the, they, and we\n"
+             "Typing 'print trie-ex all-nodes' will return:\n"
+             "t\nt-h\nt-h-e\nt-h-e-y\nw\nw-e\n"
+             "Optionally, you can use it with a prefix to view all nodes of a subtrie by typing\n"
+             "'print <trie> all-nodes <prefix>' where <prefix> is replaced by your prefix\n"
+             "For example, typing 'print trie-ex all-nodes th' will return:\n"
+             "t-h\nt-h-e\nt-h-e-y\n");
+    } else if ((!strcmp(sups[0],"only-leaves"))||(argisprint&&(!strcmp(sups[1],"only-leaves")))){
+      printf("To see only the leaves from a trie, type:\n"
+             "'print <trie> only-leaves' where trie is the key of the trie you're printing\n"
+             "This will show an alphabetical visualization of every leaf, all the way to the end\n"
+             "For example, the trie 'trie-ex' contains the, they, and we\n"
+             "Typing 'print trie-ex only-leaves' will return:\n"
+             "t-h-e-y\nw-e\n"
+             "Optionally, you can use it with a prefix to view leaves of a subtrie by typing\n"
+             "'print <trie> only-leaves <prefix>' where <prefix> is replaced by your prefix\n"
+             "For example, typing 'print trie-ex only-leaves th' will return:\n"
+             "t-h-e-y\n");
+    } else if ((!strcmp(sups[0],"only-words"))||(argisprint&&(!strcmp(sups[1],"only-words")))){
+      printf("To see only the words from a trie, type:\n"
+             "'print <trie> only-words' where trie is the key of the trie you're printing\n"
+             "This will show an alphabetical visualization of every word, even if it is not the end of the leaf\n"
+             "For example, the trie 'trie-ex' contains the, they, and we\n"
+             "Typing 'print trie-ex only-words' will return:\n"
+             "t-h-e\nt-h-e-y\nw-e\n"
+             "Optionally, you can use it with a prefix to view words of a subtrie by typing\n"
+             "'print <trie> only-words <prefix>' where <prefix> is replaced by your prefix\n"
+             "For example, typing 'print trie-ex only-words th' will return:\n"
+             "t-h-e\nt-h-e-y\n");
+    } else if (!strcmp(sups[0],"n-completions")){
+      printf("To see n completions of a prefix from a given trie, type:\n"
+             "'n-completions <trie> <n>' where trie is the key of the trie you're printing, and n is the number of completions you want\n"
+             "This will show the first n words in that trie that start with that prefix\n"
+             "For example, the trie 'trie-ex' contains the, they, and we\n"
+             "Typing 'n-completions trie-ex 2 th' will return:\n"
+             "t-h-e\nt-h-e-y\n"
+             "Typing 'n-completions trie-ex 1 th' will return:\n"
+             "t-h-e\n");
+    } else if (!strcmp(sups[0],"quit")){
+       printf("Typing 'quit' or 'q' allows you to exit the shell\n");
+    } else {
+      return 0;
+    }
   }
+
   return 1;
 }
 
