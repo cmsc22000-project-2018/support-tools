@@ -1,6 +1,6 @@
 .PHONY: all, clean
 CC = gcc
-CFLAGS = -Wall -g -Wextra -std=c99
+CFLAGS = -Wall -g -Wextra
 SRC = src/features.c src/main.c src/viz_functions.c src/trie.c src/testables.c
 # IMPL = viz_draft.c
 OBJ = shell

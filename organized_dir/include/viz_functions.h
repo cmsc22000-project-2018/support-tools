@@ -18,6 +18,9 @@
 #include <stdbool.h>
 #include "trie.h"
 
+
+int print_all_nodes(trie_t* t, char* prefix, char* str, int level, char** return_arr, unsigned int* return_index);
+
 /* Is Node:
  *
  * Parameters:

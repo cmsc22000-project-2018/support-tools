@@ -9,6 +9,92 @@
 #include <stdlib.h>
 #include "../include/viz_functions.h"
 
+int print_all_nodes(trie_t* t, char* prefix, char* str, int level, char* return_arr[], unsigned int* return_index)
+{
+    /*
+     * Make sure that all inputs are valid
+     */
+    if (t == NULL) {
+        fprintf(stderr, "print_all_nodes: t is NULL");
+        return 0;
+    }
+    if (return_arr == NULL) {
+        fprintf(stderr, "print_all_nodes: return_arr is NULL");
+        return 0;
+    }
+    if (return_index == NULL) {
+        fprintf(stderr, "print_all_nodes: return_index is NULL");
+        return 0;
+    }
+    printf("passed basic checks\n");
+
+    /*
+     * if the prefix isn't given to be null, run with a prefix
+     */
+    int run_with_prefix = (prefix == NULL) ? 0 : 1;
+    printf("Am i using a prefix? %s\n", run_with_prefix ? "yes" : "no");
+
+    /*
+     * if you are running it with a prefix, get to the appropriate subtrie
+     */
+    if (run_with_prefix) {
+       printf("why am i here?\n");
+       //make sure prefix is in the trie
+       if (trie_search(prefix, t) == 0) {
+          printf("Given prefix is not in trie.\n");
+          return 0;
+       }
+
+       /*
+        * Gets to the node where the prefix ends
+        */
+       size_t prefix_size = strlen(prefix);
+       for (size_t j = 0; j < prefix_size; ++j) {
+           t = t->children[(int)prefix[j]];
+       }
+    }
+    
+    printf("running for loop\n");
+    for (int i = 0; i < 255; i++) {
+
+        if (t->children[i]) {
+            str[level] = t->children[i]->current;
+            printf("ready to memset \n");
+            memset(str+level+1, 0, 1000-level);
+            printf("done with memset\n");
+            return_arr[*return_index] = strdup(str);
+            printf("done with strdup\n");
+            (*return_index)++;
+            print_all_nodes(t->children[i], NULL, str, level+1, return_arr, return_index);
+
+            if (!(has_children(t->children[i])))
+            {
+                level = 0;
+            }
+        }
+
+    }
+    printf("ran for loop\n");
+
+    if (run_with_prefix) {
+       /*
+        * Add the prefix string to the front of each
+        * string in the return_arr since it is left off
+        * in eviz
+        */
+       for (unsigned int i = 0; i < *return_index; ++i) {
+           char* full_child = calloc(1,100);
+           strcpy(full_child, prefix);
+           strcat(full_child, return_arr[i]);
+           strcpy(return_arr[i],full_child);
+           free(full_child);
+       }
+    }
+
+    return 1;
+}
+
+
 /*
  * See viz_functions.h
  */
@@ -39,20 +125,17 @@ int eviz(trie_t* t, char* str, int level, char** return_arr, unsigned int* retur
      * and the return_arr must add the str since it is exhaustive
      * visualization
      */
-    for (int i = 0; i < 255; i++)
-    {
+    for (int i = 0; i < 255; i++) {
 
-        if (t->children[i])
-        {
+        if (t->children[i]) {
             str[level] = t->children[i]->current;
-
+            printf("ready to memset \n");
             memset(str+level+1, 0, 1000-level);
-
+            printf("done with memset\n");
             return_arr[*return_index] = strdup(str);
-
+            printf("done with strdup\n");
             (*return_index)++;
-
-            eviz(t->children[i], str, level+1, return_arr, return_index);
+            print_all_nodes(t->children[i], NULL, str, level+1, return_arr, return_index);
 
             if (!(has_children(t->children[i])))
             {
@@ -61,72 +144,13 @@ int eviz(trie_t* t, char* str, int level, char** return_arr, unsigned int* retur
         }
 
     }
-
+ 
     return 1;
 }
 
 /*
  * See viz_functions.h
  */
-int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, unsigned int* return_index)
-{
-    if (trie_search(input, t) == 0)
-    {
-        printf("Given input is not in trie.\n");
-        return 0;
-    }
-
-    if (return_arr == NULL)
-    {
-        fprintf(stderr, "eviz: return_arr is NULL");
-        return 0;
-    }
-
-    if (return_index == NULL)
-    {
-        fprintf(stderr, "eviz: return_index is NULL");
-        return 0;
-    }
-
-    size_t input_size = strlen(input);
-
-    trie_t* subtrie = t;
-
-    /*
-     * Gets to the node where the input ends
-     */
-    for (size_t j = 0; j < input_size; ++j)
-    {
-        subtrie = subtrie->children[(int)input[j]];
-    }
-
-    /*
-     * Calls eviz to add the children of the string to
-     * return_arr
-     */
-    eviz(subtrie, str, level, return_arr, return_index);
-
-    /*
-     * Add the input string to the front of each
-     * string in the return_arr since it is left off
-     * in eviz
-     */
-    for (unsigned int i = 0; i < *return_index; ++i) {
-
-        char* full_child = calloc(1,100);
-
-        strcpy(full_child, input);
-
-        strcat(full_child, return_arr[i]);
-
-        strcpy(return_arr[i],full_child);
-
-        free(full_child);
-    }
-
-    return 1;
-}
-
 /*
  * See viz_functions.h
  */
@@ -409,7 +433,7 @@ int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_
      * pointer point to the new_arr created that copies
      * only the first nth elements of the old array
      */
-    if (return_index > n)
+    if (*return_index > n)
     {
         char* new_arr[n];
         for (unsigned int i = 0; i < n; ++i)
@@ -442,9 +466,9 @@ bool has_children_prefix(trie_t *t, char *prefix)
 
     trie_t* trie = t;
 
-    for (int i = 0; i < input_size; ++i)
+    for (size_t i = 0; i < input_size; ++i)
     {
-        trie = trie->children[prefix[i]];
+        trie = trie->children[(int)prefix[i]];
         if(trie == NULL)
         {
             return false;
