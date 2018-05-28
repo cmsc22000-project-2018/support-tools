@@ -31,7 +31,7 @@ int parse(char* input){
 
 
 int main(){
-  printf("Welcome to our Trie Visualizations tool! You can use this tool to visualize tries in terms of:\n"
+  std_indent("Welcome to our Trie Visualizations tool! You can use this tool to visualize tries in terms of:\n"
   "    - all their nodes (print [trie] all-nodes)\n"
   "    - only the leaves (print [trie] only-leaves)\n"
   "    - only the words (print [trie] only-words\n"
