@@ -31,6 +31,14 @@ int parse(char* input){
 
 
 int main(){
+  printf("Welcome to our Trie Visualizations tool! You can use this tool to visualize tries in terms of:\n"
+  "    - all their nodes (print [trie] all-nodes)\n"
+  "    - only the leaves (print [trie] only-leaves)\n"
+  "    - only the words (print [trie] only-words\n"
+  "    - a certain number of completions for a given prefix (n-completions [trie] [prefix] [n])\n"
+  "Additionally, add a prefix to any of the first three commands to see that visualization for the sub-trie beginning with that prefix\n"
+  "For more help, type 'help'\n"
+  "To exit, type 'quit'\n");
   int run = 1;
   while (run != -2){
      char* input = readline("> ");
