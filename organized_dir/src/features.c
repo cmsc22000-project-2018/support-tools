@@ -160,7 +160,7 @@ int help(char** sups){
              "Typing 'print trie-ex all-nodes' will return:\n"
              "t\nt-h\nt-h-e\nt-h-e-y\nw\nw-e\n"
              "Optionally, you can use it with a prefix to view all nodes of a subtrie by typing\n"
-             "'print <trie> all-nodes <prefix>' where <prefix> is replaced by your prefix\n"
+             "'print <trie> all-nodes [prefix]' where [prefix] is replaced by your prefix\n"
              "For example, typing 'print trie-ex all-nodes th' will return:\n"
              "t-h\nt-h-e\nt-h-e-y\n");
     } else if ((!strcmp(sups[0],"only-leaves"))||(argisprint&&(!strcmp(sups[1],"only-leaves")))){
@@ -171,7 +171,7 @@ int help(char** sups){
              "Typing 'print trie-ex only-leaves' will return:\n"
              "t-h-e-y\nw-e\n"
              "Optionally, you can use it with a prefix to view leaves of a subtrie by typing\n"
-             "'print <trie> only-leaves <prefix>' where <prefix> is replaced by your prefix\n"
+             "'print <trie> only-leaves [prefix]' where [prefix] is replaced by your prefix\n"
              "For example, typing 'print trie-ex only-leaves th' will return:\n"
              "t-h-e-y\n");
     } else if ((!strcmp(sups[0],"only-words"))||(argisprint&&(!strcmp(sups[1],"only-words")))){
@@ -182,7 +182,7 @@ int help(char** sups){
              "Typing 'print trie-ex only-words' will return:\n"
              "t-h-e\nt-h-e-y\nw-e\n"
              "Optionally, you can use it with a prefix to view words of a subtrie by typing\n"
-             "'print <trie> only-words <prefix>' where <prefix> is replaced by your prefix\n"
+             "'print <trie> only-words [prefix]' where [prefix] is replaced by your prefix\n"
              "For example, typing 'print trie-ex only-words th' will return:\n"
              "t-h-e\nt-h-e-y\n");
     } else if (!strcmp(sups[0],"n-completions")){
