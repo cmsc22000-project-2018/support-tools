@@ -12,26 +12,21 @@ struct command
 {
     char* command;
     command_function func;
-    char* help_text;
 };
 
 /* Array containing existing commands and their relevant functions */
 struct command features[] = {
-                                {"help", help, "for a list of commands"}, 
-                                {"quit", quit, "to exit the shell"},
-                                {"eviz", exec_eviz, "for an exhaustive visualization\n"
-                                    "     - need to use with a number to represent the index of the trie you're visualizing"},
-                                {"lviz", exec_lviz, "for a leaf visualization\n"
-                                    "     - need to use with a number to represent the index of the trie you're visualizing"}, 
-                                {"wviz", exec_wviz, "for a word visualization\n"
-                                    "     - need to use with a number to represent the index of the trie you're visualizing"},
-                                {"sviz", exec_sviz, "for a subtree visualization\n"
-                                    "     - need to use with a number to represent the index of the trie you're visualizing\n     - and an input string (NOT in quotes)"},
-                                {"get_children", exec_get_children, "to see children of a node\n"
-                                    "     - need to use with a number to represent the index of the trie you're getting children from\n and an input string(NOT in quotes)"},
-                                {"get_n_children", exec_get_n_children, "to see n children of a node\n"
-                                    "     - need to use with a number to represent the index of the trie you're getting children from, an input string (not in quotes), and a number n"},
-                                     };
+                                {"print", tprint},
+                                {"help", help},
+                                {"quit", quit},
+                            };
+struct command print_features[] = {
+                                {"all-nodes", print_all_nodes},
+                                {"only-words", print_only_words},
+                                {"only-leaves", print_only_leaves},
+                                {"n-completions", print_n_completions},
+                            };
+
 
 /* Number of features */
 int num_features = sizeof(features) / sizeof(struct command);
@@ -44,6 +39,11 @@ int exec(char* arg, char* sups[])
     }
   }
   return 0;
+}
+
+int tprint(char** sups)
+{
+
 }
 
 int exec_general_viz(char** sups, char which_viz)
@@ -68,6 +68,8 @@ int exec_general_viz(char** sups, char which_viz)
     success = eviz(t, path, level, return_array, return_index);
   } else if (which_viz == 'l') {
     success = lviz(t, path, level, return_array, return_index);
+  } else if (which_viz == 'L') {
+    success = lviz(t, path, level, return_array, return_index);
   } else if (which_viz == 'w') {
     success = wviz(t, path, level, return_array, return_index);
   } else if (which_viz == 's') {
@@ -86,6 +88,45 @@ int exec_general_viz(char** sups, char which_viz)
   print_viz(return_array, return_index);
   return success; 
 }
+
+int print_all_nodes(char** sups)
+{
+    if (sups[1]) {
+      return exec_general_viz(sups, 's');  
+    } else {
+      return exec_general_viz(sups, 'e');
+    }
+}
+
+int print_only_words(char** sups)
+{
+    if (sups[1]) {
+      return exec_general_viz(sups, 'c');  
+    } else {
+      return exec_general_viz(sups, 'w');
+    }
+}
+
+int print_only_leaves(char** sups)
+{
+    if (sups[1]) {
+      return exec_general_viz(sups, 'L');  
+    } else {
+      return exec_general_viz(sups, 'l');
+    }
+}
+
+int print_n_completions(char** sups)
+{
+  if (sups[1] == NULL){
+    return 0;
+  }
+  if (sups[2] == NULL){
+    return 0;
+  }
+  return exec_general_viz(sups, 'n');
+}
+
 
 int exec_lviz(char** sups)
 {
@@ -139,9 +180,10 @@ int help(char** sups){
   if (sups[0] == NULL){
      std_indent("This tool provides a set of commands to visualize a trie.\n"
             "The function takes in a main command, print, as well as a trie to be printed.\n"
-            "Additional arguments can be added in order to specify types of visualizations and to see certain subtries.\n"
+            "More arguments can be added to specify visualization types and to see subtries.\n"
             "Usage: print <trie> [option] [prefix]\n"
-            "Visualize trie using either all-nodes, only-words, or only-leaves OPTION. If no prefix is specified, the entire trie will be visualized.\n"
+            "Visualize tries using either all-nodes, only-words, or only-leaves OPTION.\n"
+            "If no prefix is specified, the entire trie will be visualized.\n"
             "Example: print trie1 only-words 'ab'\n\n"
             "Options:\n"
             "all-nodes\t prints out all nodes of the trie\n"
@@ -149,7 +191,7 @@ int help(char** sups){
             "only-leaves\t only prints out the leaves of the trie\n"
             "Type 'help [option]' for more information on each option.\n\n"
             "Prefix:\n"
-            "Include the prefix in a trie in order to print out only the subtrie under that prefix.\n");
+            "Include the prefix in a trie to print out only the subtrie under that prefix.\n");
   } else {
     argisprint = !strcmp(sups[0],"print") ? 1 : 0;
     if ((!strcmp(sups[0],"all-nodes"))||(argisprint&&(!strcmp(sups[1],"all-nodes")))){
@@ -190,9 +232,9 @@ int help(char** sups){
              "'n-completions <trie> <n>' where trie is the key of the trie you're printing, and n is the number of completions you want\n"
              "This will show the first n words in that trie that start with that prefix\n"
              "For example, the trie 'trie-ex' contains the, they, and we\n"
-             "Typing 'n-completions trie-ex 2 th' will return:\n"
+             "Typing 'print n-completions trie-ex 2 th' will return:\n"
              "t-h-e\nt-h-e-y\n"
-             "Typing 'n-completions trie-ex 1 th' will return:\n"
+             "Typing 'print n-completions trie-ex 1 th' will return:\n"
              "t-h-e\n");
     } else if (!strcmp(sups[0],"quit")){
        std_indent("Typing 'quit' or 'q' allows you to exit the shell\n");

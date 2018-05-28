@@ -7,6 +7,30 @@
  * Returns -1 if something goes wrong for internal reasons */
 int exec(char* arg, char* sups[]);
 
+
+/* Takes an input of supplementary arguments, uses only the first
+ * Prints out an exhaustive visualization of a subtrie if a prefix is given
+ * Prints out an exhaustive visualization of the whole trie if not
+ * Returns 1, 0, or -1 as described above */
+int print_all_nodes(char** sups);
+
+/* Takes an input of supplementary arguments, uses only the first
+ * Prints out a word visualization of a subtrie if a prefix is given
+ * Prints out a word visualization of the whole trie if not
+ * Returns 1, 0, or -1 as described above */
+int print_only_words(char** sups);
+
+/* Takes an input of supplementary arguments, uses only the first
+ * Prints out a leaf visualization of a subtrie if a prefix is given
+ * Prints out a leaf visualization of the whole trie if not
+ * Returns 1, 0, or -1 as described above */
+int print_only_leaves(char** sups);
+
+/* Takes an input of supplementary arguments, uses only the first
+ * Prints out n completions of a given prefix in the given trie
+ * Returns 1, 0, or -1 as described above */
+int print_n_completions(char** sups);
+
 /* Takes an input of supplementary arguments, uses only the first
  * Prints out an exhaustive visualization
  * Returns 1, 0, or -1 as described above */
