@@ -1,4 +1,4 @@
-#include "trie.h"
+#include "../../api/lib/redis-tries/include/trie.h"
 
 /* When given the function and its arguments, excecutes the relevant function
  * Returns -2 if the input is "quit"

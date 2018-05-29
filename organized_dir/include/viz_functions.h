@@ -16,7 +16,7 @@
 #define INCLUDE_VIS_FUNCTIONS_H
 
 #include <stdbool.h>
-#include "trie.h"
+#include "../../api/lib/redis-tries/include/trie.h"
 
 /* Is Node:
  *

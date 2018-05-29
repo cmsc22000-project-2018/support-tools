@@ -3,7 +3,7 @@
 #include <string.h>
 #include "../include/viz_functions.h"
 #include "../include/testables.h"
-#include "../include/trie.h"
+#include "../../api/lib/redis-tries/include/trie.h"
 
 int main(){
   trie_t** tlist = return_trie_list();
