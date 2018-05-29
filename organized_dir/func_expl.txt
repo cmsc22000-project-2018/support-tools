@@ -1,0 +1,32 @@
+1. print <trie> 
+1. print <trie> all-nodes
+- you give a trie key name
+- it grabs the trie from API
+- it does "eviz" (exhaustive)
+every node, every everything
+
+2. print <trie> all [prefix]
+- sviz
+
+2. print <trie> only-words
+- wviz
+
+3. print <trie> only-words [prefix] 
+- get_children (prefix)
+- get_children does only words, subtree does exhaustive
+
+4. print <trie> only-leaves 
+- lviz
+
+5. print <trie> only-leaves [prefix]
+- lviz with a prefix
+
+6. n-completions <prefix> n
+- get_n_children (prefix)
+
+
+help all-nodes
+help only-leaves
+help only-words
+help n-completions 
+

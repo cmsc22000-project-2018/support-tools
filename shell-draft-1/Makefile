@@ -6,7 +6,7 @@ IMPL = viz_draft.c
 OBJ = shell
 
 all: implementation
-	$(CC) $(CFLAGS) $(SRC) -o $(OBJ) -lreadline
+	$(CC) $(CFLAGS) $(SRC) -o $(OBJ) -lreadline 
 # implementation:
 #	$(CC) $(CLFLAGS) -c $(IMPL) -o implementation
 

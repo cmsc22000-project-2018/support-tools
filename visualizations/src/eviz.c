@@ -46,11 +46,11 @@ int eviz(trie_t* t, char* str, int level, char** return_arr, int* return_index) 
 
         if (t->children[i]) {
 
-            str[level] = t->children[i].current;
+            str[level] = t->children[i]->current;
 
             return_arr[*return_index] = strdup(str + '\0');
 
-            eviz(&t->children[i], str, ++level, return_arr, ++return_index);
+            eviz(t->children[i], str, ++level, return_arr, ++return_index);
         }
 
     }
