@@ -1,0 +1,20 @@
+language: c
+
+compiler: gcc
+    
+install: true
+
+stage: 
+  - build
+  - test
+
+branches:
+  only:
+    - master
+
+jobs:
+  include:
+    - stage: build
+      script: make -C organized_dir/ all
+    - stage: test
+      script: echo test
