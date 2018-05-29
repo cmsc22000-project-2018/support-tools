@@ -71,7 +71,7 @@ int print_all_nodes(trie_t* t, char* prefix, char path[], int level, char* retur
        /*
         * Add the prefix string to the front of each
         * string in the return_arr since it is left off
-        * in eviz
+        * in print_all_nodes
         */
        for (unsigned int i = 0; i < *return_index; ++i) {
            char* full_child = calloc(1,100);
@@ -85,86 +85,47 @@ int print_all_nodes(trie_t* t, char* prefix, char path[], int level, char* retur
     return 1;
 }
 
-
-/*
- * See viz_functions.h
- */
-int eviz(trie_t* t, char* str, int level, char** return_arr, unsigned int* return_index)
+int print_only_leaves(trie_t* t, char* prefix, char path[], int level, char** return_arr, unsigned int* return_index)
 {
-
-    if (t == NULL)
-    {
-        fprintf(stderr, "eviz: t is NULL");
+    /*
+     * Make sure that all inputs are valid
+     */
+    if (t == NULL) {
+        fprintf(stderr, "print_only_leaves: t is NULL");
         return 0;
     }
-
-    if (return_arr == NULL)
-    {
-        fprintf(stderr, "eviz: return_arr is NULL");
+    if (return_arr == NULL) {
+        fprintf(stderr, "print_only_leaves: return_arr is NULL");
         return 0;
     }
-
-    if (return_index == NULL)
-    {
-        fprintf(stderr, "eviz: return_index is NULL");
+    if (return_index == NULL) {
+        fprintf(stderr, "print_only_leaves: return_index is NULL");
         return 0;
     }
 
     /*
-     * Slightly different to Marco's part where str[level]
-     * adds the current char in the node of one of its children
-     * and the return_arr must add the str since it is exhaustive
-     * visualization
+     * if the prefix isn't given to be null, run with a prefix
      */
-    for (int i = 0; i < 255; i++) {
+    int run_with_prefix = (prefix == NULL) ? 0 : 1;
 
-        if (t->children[i]) {
-            str[level] = t->children[i]->current;
-            printf("ready to memset \n");
-            memset(str+level+1, 0, 1000-level);
-            printf("done with memset\n");
-            return_arr[*return_index] = strdup(str);
-            printf("done with strdup\n");
-            (*return_index)++;
-            print_all_nodes(t->children[i], NULL, str, level+1, return_arr, return_index);
+    /*
+     * if you are running it with a prefix, get to the appropriate subtrie
+     */
+    if (run_with_prefix) {
+       //make sure prefix is in the trie
+       if (trie_search(prefix, t) == 0) {
+          return 0;
+       }
 
-            if (!(has_children(t->children[i])))
-            {
-                level = 0;
-            }
-        }
-
+       /*
+        * Gets to the node where the prefix ends
+        */
+       size_t prefix_size = strlen(prefix);
+       for (size_t j = 0; j < prefix_size; ++j) {
+           t = t->children[(int)prefix[j]];
+       }
     }
  
-    return 1;
-}
-
-/*
- * See viz_functions.h
- */
-/*
- * See viz_functions.h
- */
-int lviz(trie_t* t, char path[], int level, char** return_arr, unsigned int* return_index)
-{
-    if (t == NULL)
-    {
-        fprintf(stderr, "eviz: t is NULL");
-        return 0;
-    }
-
-    if (return_arr == NULL)
-    {
-        fprintf(stderr, "eviz: return_arr is NULL");
-        return 0;
-    }
-
-    if (return_index == NULL)
-    {
-        fprintf(stderr, "eviz: return_index is NULL");
-        return 0;
-    }
-
     if (!has_children(t))
         // If current node is a leaf
     {
@@ -184,35 +145,68 @@ int lviz(trie_t* t, char path[], int level, char** return_arr, unsigned int* ret
         {
             path[level] = t->children[i]->current;
             // Make the current index of the string whatever char is present
-            lviz(t->children[i], path, level+1, return_arr, return_index);
-            // Recursively call lviz on the child node
+            print_only_leaves(t->children[i], NULL, path, level+1, return_arr, return_index);
+            // Recursively call print_only_leaves on the child node
         }
+    }
+
+    if (run_with_prefix) {
+       /*
+        * Add the prefix string to the front of each
+        * string in the return_arr since it is left off
+        * in print_only_leaves
+        */
+       for (unsigned int i = 0; i < *return_index; ++i) {
+           char* full_child = calloc(1,100);
+           strcpy(full_child, prefix);
+           strcat(full_child, return_arr[i]);
+           strcpy(return_arr[i],full_child);
+           free(full_child);
+       }
     }
 
     return 1;
 }
 
-/*
- * See viz_functions.h
- */
-int wviz(trie_t* t, char path[], int level, char** return_arr, unsigned int* return_index)
+int print_only_words(trie_t* t, char* prefix, char path[], int level, char** return_arr, unsigned int* return_index)
 {
-    if (t == NULL)
-    {
-        fprintf(stderr, "eviz: t is NULL");
+    /*
+     * Make sure that all inputs are valid
+     */
+    if (t == NULL) {
+        fprintf(stderr, "print_only_words: t is NULL");
+        return 0;
+    }
+    if (return_arr == NULL) {
+        fprintf(stderr, "print_only_words: return_arr is NULL");
+        return 0;
+    }
+    if (return_index == NULL) {
+        fprintf(stderr, "print_only_words: return_index is NULL");
         return 0;
     }
 
-    if (return_arr == NULL)
-    {
-        fprintf(stderr, "wviz: return_arr is NULL");
-        return -1;
-    }
+    /*
+     * if the prefix isn't given to be null, run with a prefix
+     */
+    int run_with_prefix = (prefix == NULL) ? 0 : 1;
 
-    if (return_index == NULL)
-    {
-        fprintf(stderr, "wviz: return_index is NULL");
-        return -1;
+    /*
+     * if you are running it with a prefix, get to the appropriate subtrie
+     */
+    if (run_with_prefix) {
+       //make sure prefix is in the trie
+       if (trie_search(prefix, t) == 0) {
+          return 0;
+       }
+
+       /*
+        * Gets to the node where the prefix ends
+        */
+       size_t prefix_size = strlen(prefix);
+       for (size_t j = 0; j < prefix_size; ++j) {
+           t = t->children[(int)prefix[j]];
+       }
     }
 
     if (t->is_word)
@@ -234,13 +228,45 @@ int wviz(trie_t* t, char path[], int level, char** return_arr, unsigned int* ret
         {
             path[level] = t->children[i]->current;
             // Add it to the string
-            wviz(t->children[i], path, level+1, return_arr, return_index);
-            // Recursively call wviz on the current node
+            print_only_words(t->children[i], NULL, path, level+1, return_arr, return_index);
+            // Recursively call print_only_words on the current node
         }
+    }
+
+    if (run_with_prefix) {
+       /*
+        * Add the prefix string to the front of each
+        * string in the return_arr since it is left off
+        * in print_all_nodes
+        */
+       for (unsigned int i = 0; i < *return_index; ++i) {
+           char* full_child = calloc(1,100);
+           strcpy(full_child, prefix);
+           strcat(full_child, return_arr[i]);
+           strcpy(return_arr[i],full_child);
+           free(full_child);
+       }
     }
 
     return 1;
 }
+
+int print_n_completions(trie_t* t, char* prefix, char path[], int level, char** return_arr, unsigned int n)
+{
+    unsigned int* return_index = malloc(sizeof(unsigned int));
+    print_only_words(t, prefix, path, level, return_arr, return_index);
+    if (*return_index > n) {
+        char* new_arr[n];
+        for (unsigned int i = 0; i < n; ++i)
+        {
+            new_arr[i] = return_arr[i];
+        }
+        return_arr = new_arr;
+    }
+
+    return 1;
+}
+
 
 /*
  * Print an individual string with correct hyphens
@@ -291,155 +317,6 @@ int is_node(trie_t* t, char* str)
     // If you go all the way through the trie, return true. Else, false.
 }
 
-/*
- * See viz_functions.h
- */
-int get_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, unsigned int* return_index)
-{
-
-    if (trie_search(prefix, t) == 0)
-    {
-        printf("Given input is not in trie.\n");
-        return 0;
-    }
-
-    if (t == NULL)
-    {
-        fprintf(stderr, "eviz: t is NULL");
-        return 0;
-    }
-
-    if (return_arr == NULL)
-    {
-        fprintf(stderr, "eviz: return_arr is NULL");
-        return 0;
-    }
-
-    if (return_index == NULL)
-    {
-        fprintf(stderr, "eviz: return_index is NULL");
-        return 0;
-    }
-
-    size_t input_size = strlen(prefix);
-
-    trie_t* subtrie = t;
-
-    /*
-     * Gets to the node where the input ends
-     */
-    for (size_t j = 0; j < input_size; ++j)
-    {
-        subtrie = subtrie->children[(int)prefix[j]];
-    }
-
-    /*
-     * Calls wviz to add the children of the string to
-     * return_arr
-     */
-    wviz(subtrie, str, level, return_arr, return_index);
-
-    /*
-     * Add the input string to the front of each
-     * string in the return_arr since it is left off
-     * in wviz
-     */
-    for (unsigned int i = 0; i < *return_index; ++i)
-    {
-        char* full_child = calloc(1,100);
-
-        strcpy(full_child, prefix);
-
-        strcat(full_child, return_arr[i]);
-
-        strcpy(return_arr[i],full_child);
-
-        free(full_child);
-    }
-
-    return 1;
-}
-
-/*
- * See viz_functions.h
- */
-int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, unsigned int n)
-{
-
-    if (trie_search(prefix, t) == 0)
-    {
-        printf("Given input is not in trie.\n");
-        return 0;
-    }
-
-    if (return_arr == NULL)
-    {
-        fprintf(stderr, "eviz: return_arr is NULL");
-        return 0;
-    }
-
-    size_t input_size = strlen(prefix);
-
-    trie_t* subtrie = t;
-
-    /*
-     * Gets to the node where the input ends
-     */
-    for (size_t j = 0; j < input_size; ++j)
-    {
-        subtrie = subtrie->children[(int)prefix[j]];
-    }
-
-    unsigned int* return_index = malloc(sizeof(unsigned int));
-    *return_index = 0;
-
-    /*
-     * Calls wviz to add the children of the string to
-     * return_arr
-     */
-    wviz(subtrie, str, level, return_arr, return_index);
-
-    /*
-     * Add the input string to the front of each
-     * string in the return_arr since it is left off
-     * in wviz
-     */
-
-    for (unsigned int i = 0; i < *return_index; ++i)
-    {
-        char* full_child = calloc(1,100);
-
-        strcpy(full_child, prefix);
-
-        strcat(full_child, return_arr[i]);
-
-        strcpy(return_arr[i],full_child);
-
-        free(full_child);
-    }
-
-    /*
-     * If the size of the word array is bigger than
-     * the size we need, make sure the return_array
-     * pointer point to the new_arr created that copies
-     * only the first nth elements of the old array
-     */
-    if (*return_index > n)
-    {
-        char* new_arr[n];
-        for (unsigned int i = 0; i < n; ++i)
-        {
-            new_arr[i] = return_arr[i];
-        }
-        return_arr = new_arr;
-    }
-
-    return 1;
-}
-
-/*
- * See viz_functions.h
- */
 bool has_children_prefix(trie_t *t, char *prefix)
 {
 
