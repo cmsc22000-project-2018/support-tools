@@ -15,7 +15,7 @@ Simply open the support-tools directory in a command line tool, switch into the 
 $ make all
 
 ## Opening the shell
-From here, simply print ./shell
+From here, simply type ./shell
 
 ## Running commands
 The shell greets the user. Type "help" at any point to see a full list of commands!
@@ -28,14 +28,14 @@ The basic format of print commands in the shell is:
 $ print <trie index>
 Running this command alone will print every node in the trie.
 
-By addending "all [prefix]" to the above command, only the nodes flowing down from the entered prefix will be printed.
+By appending "all [prefix]" to the above command, only the nodes flowing down from the entered prefix will be printed.
 
-By addending "only-words" to the basic print command, only the nodes of the trie marked as words will be printed.
+By appending "only-words" to the basic print command, only the nodes of the trie marked as words will be printed.
 Additionally, a command in the form of:
 $ print <trie index> only-words [prefix]
 Will print only the nodes flowing down from the entered prefix that are also words.
 
-By addending "only-leaves" to the basic print command, only the leaves of the given trie will be printed.
+By appending "only-leaves" to the basic print command, only the leaves of the given trie will be printed.
 Additionally, a command in the form of:
 $ print <trie index> only-leaves [prefix]
 Will print only the leaves flowing down from the entered prefix.
