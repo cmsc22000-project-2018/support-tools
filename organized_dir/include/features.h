@@ -7,60 +7,13 @@
  * Returns -1 if something goes wrong for internal reasons */
 int exec(char* arg, char* sups[]);
 
-
-/* Takes an input of supplementary arguments, uses only the first
- * Prints out an exhaustive visualization of a subtrie if a prefix is given
- * Prints out an exhaustive visualization of the whole trie if not
+/* Takes an input of supplementary arguments
+ * Interprets the first argument to represent the key of a trie
+ * Uses the second argument to determine which visualization to call
+ * Uses the third optionally as a prefix
+ * Uses the fourth optionally as a number of completions
  * Returns 1, 0, or -1 as described above */
-int print_all_nodes(char** sups);
-
-/* Takes an input of supplementary arguments, uses only the first
- * Prints out a word visualization of a subtrie if a prefix is given
- * Prints out a word visualization of the whole trie if not
- * Returns 1, 0, or -1 as described above */
-int print_only_words(char** sups);
-
-/* Takes an input of supplementary arguments, uses only the first
- * Prints out a leaf visualization of a subtrie if a prefix is given
- * Prints out a leaf visualization of the whole trie if not
- * Returns 1, 0, or -1 as described above */
-int print_only_leaves(char** sups);
-
-/* Takes an input of supplementary arguments, uses only the first
- * Prints out n completions of a given prefix in the given trie
- * Returns 1, 0, or -1 as described above */
-int print_n_completions(char** sups);
-
-/* Takes an input of supplementary arguments, uses only the first
- * Prints out an exhaustive visualization
- * Returns 1, 0, or -1 as described above */
-int exec_eviz(char** sups);
-
-/* Takes an input of supplementary arguments, uses only the first
- * Prints out a leaf visualization
-
- * Returns 1, 0, or -1 as described above */ 
-int exec_lviz(char** sups);
-
-/* Takes an input of supplementary arguments, uses only the first
- * Prints out a word visualization
- * Returns 1, 0, or -1 as described above */ 
-int exec_wviz(char** sups);
-
-/* Takes an input of supplementary arguments, uses the first and second
- * Prints out a subtree visualization
- * Returns 1, 0, or -1 as described above */
-int exec_sviz(char** sups);
-
-/* Takes an input of supplementary arguments, uses the first and second
- * Prints out children of a node
- * Returns 1, 0, or -1 as described above */
-int exec_get_children(char** sups);
-
-/* Takes an input of supplementary arguments, uses the first, second, and third
- * Prints out the first n children of a node
- * Returns 1, 0, or -1 as described above */
-int exec_get_n_children(char** sups);
+int tprint(char** sups);
 
 /* Returns -2, does nothing else*/
 int quit(char** sups);

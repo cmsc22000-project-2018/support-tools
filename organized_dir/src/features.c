@@ -19,12 +19,7 @@ struct command features[] = {
                                 {"print", tprint},
                                 {"help", help},
                                 {"quit", quit},
-                            };
-struct command print_features[] = {
-                                {"all-nodes", print_all_nodes},
-                                {"only-words", print_only_words},
-                                {"only-leaves", print_only_leaves},
-                                {"n-completions", print_n_completions},
+                                {"q", quit},
                             };
 
 
@@ -43,16 +38,8 @@ int exec(char* arg, char* sups[])
 
 int tprint(char** sups)
 {
-
-}
-
-int exec_general_viz(char** sups, char which_viz)
-{
-  if (sups[0] == NULL){
-    return 0;
-  }
-  trie_t* t = get_trie(sups[0]) ;
-  if (t == NULL){
+  trie_t* t = get_trie(sups[0]);
+  if (t == NULL) {
     return 0;
   }
 
@@ -64,111 +51,28 @@ int exec_general_viz(char** sups, char which_viz)
 
   int success;
 
-  if (which_viz == 'e') {
-    success = eviz(t, path, level, return_array, return_index);
-  } else if (which_viz == 'l') {
-    success = lviz(t, path, level, return_array, return_index);
-  } else if (which_viz == 'L') {
-    success = lviz(t, path, level, return_array, return_index);
-  } else if (which_viz == 'w') {
-    success = wviz(t, path, level, return_array, return_index);
-  } else if (which_viz == 's') {
-    char* input = sups[1];
-    success = sviz(t, input, path, level, return_array, return_index);
-  } else if (which_viz == 'c') {
-    char* input = sups[1];
-    success = get_children(t, input, path, level, return_array, return_index);
-  } else if (which_viz == 'n') {
-    char* input = sups[1];
-    int n = atoi(sups[2]);
+  if (sups[1] == NULL) {
+    success = print_all_nodes(t, sups[2], path, level, return_array, return_index);
+  } else if (!strcmp(sups[1],"all-nodes")) {
+    success = print_all_nodes(t, sups[2], path, level, return_array, return_index);
+  } else if (!strcmp(sups[1],"all-nodes")) {
+    success = print_all_nodes(t, sups[2], path, level, return_array, return_index);
+  } else if (!strcmp(sups[1],"only-leaves")) {
+    success = print_only_leaves(t, sups[2], path, level, return_array, return_index);
+  } else if (!strcmp(sups[1],"only-words")) {
+    success = print_only_words(t, sups[2], path, level, return_array, return_index);
+  } else if (!strcmp(sups[1],"n-completions")) {
+    unsigned int n = atoi(sups[3]);
     *return_index = n;
-    success = get_n_children(t, input, path, level, return_array, n);
+    success = print_n_completions(t, sups[2], path, level, return_array, n);
+  } else {
+    return 0;
   }
-  
+
   print_viz(return_array, return_index);
   return success; 
 }
 
-int print_all_nodes(char** sups)
-{
-    if (sups[1]) {
-      return exec_general_viz(sups, 's');  
-    } else {
-      return exec_general_viz(sups, 'e');
-    }
-}
-
-int print_only_words(char** sups)
-{
-    if (sups[1]) {
-      return exec_general_viz(sups, 'c');  
-    } else {
-      return exec_general_viz(sups, 'w');
-    }
-}
-
-int print_only_leaves(char** sups)
-{
-    if (sups[1]) {
-      return exec_general_viz(sups, 'L');  
-    } else {
-      return exec_general_viz(sups, 'l');
-    }
-}
-
-int print_n_completions(char** sups)
-{
-  if (sups[1] == NULL){
-    return 0;
-  }
-  if (sups[2] == NULL){
-    return 0;
-  }
-  return exec_general_viz(sups, 'n');
-}
-
-
-int exec_lviz(char** sups)
-{
-  return exec_general_viz(sups, 'l');
-}
-
-int exec_eviz(char** sups)
-{
-  return exec_general_viz(sups, 'e');
-}
-
-int exec_wviz(char** sups)
-{
-  return exec_general_viz(sups, 'w');
-}
-
-int exec_sviz(char** sups)
-{
-  if (sups[1] == NULL){
-    return 0;
-  }
-  return exec_general_viz(sups, 's');
-}
-
-int exec_get_children(char** sups)
-{
-  if (sups[1] == NULL){
-    return 0;
-  }
-  return exec_general_viz(sups, 'c');
-}
-
-int exec_get_n_children(char** sups)
-{
-  if (sups[1] == NULL){
-    return 0;
-  }
-  if (sups[2] == NULL){
-    return 0;
-  }
-  return exec_general_viz(sups, 'n');
-}
 
 int quit(char** sups){
   sups++;
