@@ -7,7 +7,7 @@
 
 void call_all_nodes(trie_t** tlist) {
   trie_t* t = tlist[0];
-  char* path = calloc(100,1);
+  char* path = calloc(1000,1);
   int level = 0;
   unsigned int* return_index = malloc(sizeof(unsigned int));
   (*return_index) = 0;
@@ -19,7 +19,7 @@ void call_all_nodes(trie_t** tlist) {
 
 void call_all_nodes_prefix(trie_t** tlist) {
   trie_t* t = tlist[0];
-  char* path = calloc(100,1);
+  char* path = calloc(1000,1);
   int level = 0;
   unsigned int* return_index = malloc(sizeof(unsigned int));
   (*return_index) = 0;
@@ -80,8 +80,6 @@ void call_sviz(trie_t** tlist) {
 
 int main(){
   trie_t** tlist = return_trie_list();
-  printf("\neviz:\n");
-  call_eviz(tlist);
   printf("\nall_nodes:\n");
   call_all_nodes(tlist);
   printf("\nall_nodes with prefix:\n");

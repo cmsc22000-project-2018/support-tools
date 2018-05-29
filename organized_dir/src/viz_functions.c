@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include "../include/viz_functions.h"
 
-int print_all_nodes(trie_t* t, char* prefix, char* str, int level, char* return_arr[], unsigned int* return_index)
+int print_all_nodes(trie_t* t, char* prefix, char path[], int level, char* return_arr[], unsigned int* return_index)
 {
     /*
      * Make sure that all inputs are valid
@@ -26,22 +26,18 @@ int print_all_nodes(trie_t* t, char* prefix, char* str, int level, char* return_
         fprintf(stderr, "print_all_nodes: return_index is NULL");
         return 0;
     }
-    printf("passed basic checks\n");
 
     /*
      * if the prefix isn't given to be null, run with a prefix
      */
     int run_with_prefix = (prefix == NULL) ? 0 : 1;
-    printf("Am i using a prefix? %s\n", run_with_prefix ? "yes" : "no");
 
     /*
      * if you are running it with a prefix, get to the appropriate subtrie
      */
     if (run_with_prefix) {
-       printf("why am i here?\n");
        //make sure prefix is in the trie
        if (trie_search(prefix, t) == 0) {
-          printf("Given prefix is not in trie.\n");
           return 0;
        }
 
@@ -54,18 +50,14 @@ int print_all_nodes(trie_t* t, char* prefix, char* str, int level, char* return_
        }
     }
     
-    printf("running for loop\n");
     for (int i = 0; i < 255; i++) {
 
         if (t->children[i]) {
-            str[level] = t->children[i]->current;
-            printf("ready to memset \n");
-            memset(str+level+1, 0, 1000-level);
-            printf("done with memset\n");
-            return_arr[*return_index] = strdup(str);
-            printf("done with strdup\n");
+            path[level] = t->children[i]->current;
+            memset(path+level+1, 0, 1000-level-1);
+            return_arr[*return_index] = strdup(path);
             (*return_index)++;
-            print_all_nodes(t->children[i], NULL, str, level+1, return_arr, return_index);
+            print_all_nodes(t->children[i], NULL, path, level+1, return_arr, return_index);
 
             if (!(has_children(t->children[i])))
             {
@@ -74,7 +66,6 @@ int print_all_nodes(trie_t* t, char* prefix, char* str, int level, char* return_
         }
 
     }
-    printf("ran for loop\n");
 
     if (run_with_prefix) {
        /*
