@@ -1,17 +1,74 @@
-# CS220 - Support Tools
+#Support Tools
 
-## Purpose
-A tool which, when given a trie, will print out a visualization of the trie for debugging purposes.
+##Description
+This program allows for the visualization of tries (see https://en.wikipedia.org/wiki/Trie). This tool was developed at the University of Chicago, during Spring Quarter of 2018, for CMSC 22000 - Intro to Software Development, in conjunction with a Redis (https://redis.io/) module for use with tries. This program uses a shell to facillitate interaction between the user and the trie they're visualizing.
 
-## Method
-Given a dictionary stored in a trie, we will use the shell to print out representations of the trie in alphabetical order. There will be four different types of visualizations.
+#Using the shell
+These instructions will guide you through using the Support Tools trie visualization suite.
 
-### Exhaustive Visualization
-The first will be exhaustive and print out all possible paths
-#### Use Cases
-Debugging the flow of a trie
-#### Example
-***
+## Prerequisites
+Make sure you have the most recent master branch of the code from out Github repo(https://github.com/cmsc22000-project-2018/support-tools) !
+You will also need a command line tool, like Terminal, to build and interact with the code.
+
+## Making the code
+Simply open the support-tools directory in a command line tool, switch into the consolidated_shell directory, and type:
+$ make all
+
+## Opening the shell
+From here, simply print ./shell
+
+## Running commands
+The shell greets the user. Type "help" at any point to see a full list of commands!
+
+### Selecting your trie
+Right now, all commands within the shell must indicate the index of one of three hardcoded tries, so 0, 1, or 2. In the future, we will allow for a key-based interaction with a remote Redis server. This document will be updated when such functionality is integrated.
+
+### Visualizing your trie
+The basic format of print commands in the shell is:
+$ print <trie index>
+Running this command alone will print every node in the trie.
+
+By addending "all [prefix]" to the above command, only the nodes flowing down from the entered prefix will be printed.
+
+By addending "only-words" to the basic print command, only the nodes of the trie marked as words will be printed.
+Additionally, a command in the form of:
+$ print <trie index> only-words [prefix]
+Will print only the nodes flowing down from the entered prefix that are also words.
+
+By addending "only-leaves" to the basic print command, only the leaves of the given trie will be printed.
+Additionally, a command in the form of:
+$ print <trie index> only-leaves [prefix]
+Will print only the leaves flowing down from the entered prefix.
+
+The command:
+$ print <trie-index> n-completions [prefix] n
+Will print the first n words of a given trie flowing down from the entered prefix.
+
+### Getting Help
+Typing:
+$ help
+at any time will print a list of all possible commands and their explanations.
+
+Additionally:
+$ help all-nodes
+$ help only-leaves
+$ help only-words
+$ help n-completions
+Will specifically explain the referenced command.
+
+### Exiting the shell
+Simply type
+$ quit
+
+# Examples
+These examples specifically use a trie, referenced by index 0, that contains the leaves "bets" and "betters"
+
+## Basic print
+
+$ print 0
+
+Would yield:
+
 b
 
 b-e
@@ -27,27 +84,27 @@ b-e-t-t-e
 b-e-t-t-e-r
 
 b-e-t-t-e-r-s
-***
 
-### Leaf Visualization
-The second visualization will print out each leaf of the trie
-#### Use Cases:
-Debugging how extensive the words the trie contains is
-#### Examples:
-***
-b-e-t-t-e-r-e-d
+## All nodes with prefix
 
-b-e-t-t-e-r-m-e-n-t
+$ print 0 all bette
+
+Would yield:
+
+b-e-t-t-e
+
+b-e-t-t-e-r
 
 b-e-t-t-e-r-s
-***
 
-### Word Visualization
-The third visualization will print out every word in the trie
-#### Use Cases:
-Debugging whether words are correctly counted as words and not strings
-#### Example:
-***
+## Printing only words
+
+$ print 0 only-words
+
+Would yield:
+
+b-e
+
 b-e-t
 
 b-e-t-s
@@ -56,96 +113,57 @@ b-e-t-t-e-r
 
 b-e-t-t-e-r-s
 
-b-e-t-t-e-r-m-e-n-t
-***
+## Printing only words with a prefix
 
-### Subtree Visualization
-The fourth visualization will take a string (not necessarily a word) and print all of its children
-#### Use Cases:
-Debugging spelling or whether a specific word has been misspelled.
-#### Examples:
-***
-input:
+$ print 0 only-words bette
 
-b-e-t-t
-
-
-output:
-
-b-e-t-t
-
-b-e-t-t-e
+Would yield:
 
 b-e-t-t-e-r
 
-b-e-t-t-e-r-m
+b-e-t-t-e-r-s
 
-b-e-t-t-e-r-m-e
+## Printing only leaves
 
-b-e-t-t-e-r-m-e-n
+$ print 0 only-leaves
 
-b-e-t-t-e-r-m-e-n-t
+Would yield:
+
+b-e-t-s
 
 b-e-t-t-e-r-s
-***
 
-# Shell Functionality
+## Printing only leaves with a prefix
 
-_API (These simply call the API for their functionality, and are written by their respective teams):_
+$ print 0 only-leaves bette
 
-+ trie_t* new_trie();
-+ void import_trie(trie_t*);
-+ void add_node(trie_t*);
-+ void remove_node(trie_t*, node_t*);
-+ void print_eviz(char**);
-+ void print_lviz(char**);
-+ void print_wviz(char**);
-+ void print_sviz(char**);
+Would yield:
 
-Note: the print_viz functions will call the viz functions so that the user only has to call the print_viz functions. We will seperate the viz functions and include them in the .h file for testing purposes.
+b-e-t-t-e-r-s
 
-_Functions written from scratch:_
-+ int eviz(trie_t*, char path[], int level, char** return_arr, int* return_index);
-+ int lviz(trie_t*, char path[], int level, char** return_arr, int* return_index);
-+ int wviz(trie_t*, char path[], int level, char** return_arr, int* return_index);
-+ int sviz(trie_t*, char input[], char path[], int level, char** return_arr, int* return_index);
-+ trie_t* trace(trie_t*, node_t*);
-+ trie_t* isolate_subtree(trie_t*, node_t*);
+## Printing n-completions
 
-**Elaborations:**
+$ print 0 n-completions b 1
 
-_eviz_ - Exhaustive visualization as described above.
+Would yield:
 
-_lviz_ - Leaf visualization as above.
+b-e
 
-_wviz_ - Word visualization as above.
+#Authors
 
-_sviz_ - Subtree visualization as above.
+This project was made by:
 
-_trace_ - This function takes a node and traces the path from that node to the head of the tree. It then produces this as a trie. For example, from the above tree and the node of the terminal "e" in "thee" it produces the full path from the head of the tree to that "e" as a seperate tree.
+Hongji Li
+Maxine King
+Elizabeth Crowdus
+Richard Pei
+Marco Kaisth
 
-_isolate_subtree_ - This will take a trie and a node and output a pointer to a subtree with the given node as its head and all child entries as in the original tree.
+# Acknowledgments
 
-### Interface
+This project was supervised by:
 
-To enter the shell, the user will input:
+Borja Sotomayor
+Lydia Filipe
 
-    ./trie-viz [file]
-
-From there they will see
-```
-Welcome to the Trie-Viz shell!
-Please either load in a trie or create a new one.
-```
-
-Here, they will be able to use the commands:
-
-+ h - to view all commands possible
-+ new - to create a new trie
-+ import [file] - to import a trie
-+ eviz - exhaustive visualization
-+ lviz - leaf visualization
-+ wviz - word visualization
-+ sviz [node] - sub tree visualization
-+ add [node] - add a node to the given tree
-+ remove [node] - removes node from given tree
+Additionally, this document is based on a template created by Github user PurpleBooth, availible here: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
