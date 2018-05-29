@@ -51,6 +51,17 @@ int help(char** sups);
  * Returns a pointer to it */
 trie_t* get_trie(char* index_str);
 
+/* Helper function to print with a standardized indentation
+ * Takes an input of a string and prints with 2 spaces as an indent
+ */
+void std_indent(char* string);
+
+/* Helper function to print with a given indentation 
+ * Takes a string and a number n, prints the string with each line indented n spaces
+ */
+void print_indented_n(char* string, int indent);
+
+
 /*
 const char* inputs = {
   "help",
