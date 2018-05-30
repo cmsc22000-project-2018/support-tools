@@ -18,6 +18,7 @@
 #include <stdbool.h>
 #include "trie.h"
 
+
 /* Is Node:
  *
  * Parameters:
@@ -42,24 +43,7 @@ int is_node(trie_t* t, char* str);
  */
 bool has_children_prefix(trie_t *t, char *prefix);
 
-/* Get Children:
- *
- * Parameters:
- *  - t: a trie pointer pointed to the head of the tree
- *  - prefix: an input string
- *  - str: an empty string to fill as it goes down the trie
- *  - level: indicate the current level of the trie as well as
- *           the index of the str to fill
- *  - return_arr: a pointer to the array of strings that return
- *  - return_index: current index of the array, also the size of return_arr
- *
- * Returns:
- *  - 0 if something goes wrong, 1 if everything works
- *
- */
-int get_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, unsigned int* return_index);
-
-/* Get N Children:
+/* Print N Completions:
  *
  * Parameters:
  *  - t: a trie pointer pointed to the head of the tree
@@ -74,30 +58,13 @@ int get_children(trie_t* t, char* prefix, char* str, int level, char** return_ar
  *  - 0 if something goes wrong, 1 if everything works
  *
  */
-int get_n_children(trie_t* t, char* prefix, char* str, int level, char** return_arr, unsigned int n);
+int print_n_completions(trie_t* t, char* prefix, char path[], int level, char** return_arr, unsigned int n);
 
-/* Subtree Visualization:
+/* Leaf visualization
  *
  * Parameters:
  *  - t: a trie pointer pointed to the head of the tree
- *  - input: an input string
- *  - str: an empty string to fill as it goes down the trie
- *  - level: indicate the current level of the trie as well as
- *           the index of the str to fill
- *  - return_arr: a pointer to the array of strings that return
- *  - return_index: current index of the array
- *
- * Returns:
- *  - 0 if something goes wrong, 1 if everything works
- *
- */
-int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, unsigned int* return_index);
-
-
-/* Word visualization
- *
- * Parameters:
- *  - t: a trie pointer pointed to the head of the tree
+ *  - prefix: a prefix to visualize; to print the whole tree, set prefix = NULL 
  *  - path: an empty string to fill as it goes down the trie
  *  - level: indicate the current level of the trie as well as
  *           the index of the str to fill
@@ -107,12 +74,13 @@ int sviz(trie_t* t, char* input, char* str, int level, char** return_arr, unsign
  * Returns:
  *  - 0 if something goes wrong, 1 if everything works
  */
-int lviz(trie_t* t, char path[], int level, char** return_arr, unsigned int* return_index);
+int print_only_leaves(trie_t* t, char* prefix, char path[], int level, char** return_arr, unsigned int* return_index);
 
 /* Word visualization
  *
  * Parameters:
  *  - t: a trie pointer pointed to the head of the tree
+ *  - prefix: a prefix to visualize; to print the whole tree, set prefix = NULL 
  *  - path: an empty string to fill as it goes down the trie
  *  - level: indicate the current level of the trie as well as
  *           the index of the str to fill
@@ -122,13 +90,14 @@ int lviz(trie_t* t, char path[], int level, char** return_arr, unsigned int* ret
  * Returns:
  *  - 0 if something goes wrong, 1 if everything works
  */
-int wviz(trie_t* t, char path[], int level, char** return_arr, unsigned int* return_index);
+int print_only_words(trie_t* t, char* prefix, char path[], int level, char** return_arr, unsigned int* return_index);
 
-/* Exhaustive Visualization:
+/* Exhaustive Visualization (All Nodes):
  *
  * Parameters:
  *  - t: a trie pointer pointed to the head of the tree
- *  - str: an empty string to fill as it goes down the trie
+ *  - prefix: a prefix to visualize; to print the whole tree, set prefix = NULL 
+ *  - path: an empty string to fill as it goes down the trie
  *  - level: indicate the current level of the trie as well as
  *           the index of the str to fill
  *  - return_arr: a pointer to the array of strings that return
@@ -138,7 +107,7 @@ int wviz(trie_t* t, char path[], int level, char** return_arr, unsigned int* ret
  *  - 0 if something goes wrong, 1 if everything works
  *
  */
-int eviz(trie_t* t, char* str, int level, char** return_arr, unsigned int* return_index);
+int print_all_nodes(trie_t* t, char* prefix, char path[], int level, char** return_arr, unsigned int* return_index);
 
 /* Print Viz:
  *
