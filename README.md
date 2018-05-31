@@ -1,9 +1,9 @@
-#Support Tools
+# Support Tools
 
-##Description
+## Description
 This program allows for the visualization of tries (see https://en.wikipedia.org/wiki/Trie). This tool was developed at the University of Chicago, during Spring Quarter of 2018, for CMSC 22000 - Intro to Software Development, in conjunction with a Redis (https://redis.io/) module for use with tries. This program uses a shell to facillitate interaction between the user and the trie they're visualizing.
 
-#Using the shell
+# Using the shell
 These instructions will guide you through using the Support Tools trie visualization suite.
 
 ## Prerequisites
@@ -14,7 +14,7 @@ You will also need a command line tool, like Terminal, to build and interact wit
 Simply open the support-tools directory in a command line tool, switch into the consolidated_shell directory, and type:
 $ make all
 
-## Opening the shell
+##: Opening the shell
 From here, simply type ./shell
 
 ## Running commands
@@ -149,21 +149,21 @@ Would yield:
 
 b-e
 
-#Authors
+# Authors
 
 This project was made by:
 
-Hongji Li
-Maxine King
-Elizabeth Crowdus
-Richard Pei
-Marco Kaisth
++ Hongji Li
++ Maxine King
++ Elizabeth Crowdus
++ Richard Pei
++ Marco Kaisth
 
 # Acknowledgments
 
 This project was supervised by:
 
-Borja Sotomayor
-Lydia Filipe
++ Borja Sotomayor (instructor)
++ Lydia Filipe (TA)
 
 Additionally, this document is based on a template created by Github user PurpleBooth, availible here: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
