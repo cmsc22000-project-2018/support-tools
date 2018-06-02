@@ -3,8 +3,8 @@
 #include <stdbool.h>
 #include <stdarg.h>
 #include <string.h>
-#include "visualization.h"
-#include "trie.h"
+#include "../include/viz_functions.h"
+#include "../include/trie.h"
 
 
 /* TESTS FOR TRIE_VISUALIZATION FNS
