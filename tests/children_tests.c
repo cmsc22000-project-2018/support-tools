@@ -9,7 +9,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include <stdlib.h>
-#include "../include/children.h"
+#include "../include/viz_functions.h"
 
 //helper fn to 
 //adapted from a function i wrote for the viz_tests last sprint
