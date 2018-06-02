@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../include/viz_functions.h"
-#include "../include/testables.h"
-#include "../include/trie.h"
+
+#include "viz_functions.h"
+#include "testables.h"
+#include "trie.h"
 
 void call_all_nodes(trie_t** tlist, int index) {
   trie_t* t = tlist[index];
@@ -104,8 +105,6 @@ void call_eviz(trie_t** tlist) {
   eviz(t, path, level, return_array, return_index);
   print_viz(return_array, return_index);
 }
-
-
 
 void call_wviz(trie_t** tlist) {
   trie_t* t = tlist[0];

@@ -18,7 +18,6 @@
 #include <stdbool.h>
 #include "trie.h"
 
-
 /* Is Node:
  *
  * Parameters:

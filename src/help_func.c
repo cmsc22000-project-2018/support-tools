@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "../include/features.h"
-#include "../include/viz_functions.h"
-#include "../include/testables.h"
+#include "features.h"
+#include "viz_functions.h"
+#include "testables.h"
 
 int main() {
     printf("This tool provides a set of commands to visualize a trie.\n"
