@@ -1,11 +1,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-
-#include "features.h"
-#include "viz_functions.h"
-#include "testables.h"
-
+#include "../include/features.h"
+#include "../include/viz_functions.h"
+#include "../include/testables.h"
 
 /* Setup to allow for handler array */
 typedef int (*command_function)(char** sups);
@@ -23,6 +21,7 @@ struct command features[] = {
                                 {"quit", quit},
                                 {"q", quit},
                             };
+
 
 /* Number of features */
 int num_features = sizeof(features) / sizeof(struct command);
@@ -69,9 +68,11 @@ int tprint(char** sups)
   } else {
     return 0;
   }
+
   print_viz(return_array, return_index);
   return success; 
 }
+
 
 int quit(char** sups){
   sups++;

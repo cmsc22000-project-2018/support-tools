@@ -3,7 +3,7 @@
 #include <string.h>
 #include <readline/readline.h>
 #include <unistd.h>
-#include "features.h"
+#include "../include/features.h"
 
 
 int parse(char* input){

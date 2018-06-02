@@ -21,7 +21,6 @@ every node, every everything
 5. print <trie> only-leaves [prefix]
 - lviz with a prefix
 
-
 6. print n-completions <prefix> n
 - get_n_children (prefix)
 

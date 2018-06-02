@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "viz_functions.h"
+#include "../include/viz_functions.h"
 
 int print_all_nodes(trie_t* t, char* prefix, char path[], int level, char* return_arr[], unsigned int* return_index)
 {
@@ -58,6 +58,7 @@ int print_all_nodes(trie_t* t, char* prefix, char path[], int level, char* retur
             return_arr[*return_index] = strdup(path);
             (*return_index)++;
             print_all_nodes(t->children[i], NULL, path, level+1, return_arr, return_index);
+
             if (!(has_children(t->children[i])))
             {
                 level = 0;
@@ -65,6 +66,7 @@ int print_all_nodes(trie_t* t, char* prefix, char path[], int level, char* retur
         }
 
     }
+
     if (run_with_prefix) {
        /*
         * Add the prefix string to the front of each
@@ -123,6 +125,7 @@ int print_only_leaves(trie_t* t, char* prefix, char path[], int level, char** re
            t = t->children[(int)prefix[j]];
        }
     }
+ 
     if (!has_children(t))
         // If current node is a leaf
     {
@@ -263,6 +266,7 @@ int print_n_completions(trie_t* t, char* prefix, char path[], int level, char** 
 
     return 1;
 }
+
 
 /*
  * Print an individual string with correct hyphens
