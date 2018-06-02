@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
-#include "../include/features.h"
-#include "../include/viz_functions.h"
-#include "../include/testables.h"
+#include "features.h"
+#include "viz_functions.h"
+#include "testables.h"
 
 /* Setup to allow for handler array */
 typedef int (*command_function)(char** sups);

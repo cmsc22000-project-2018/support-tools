@@ -15,6 +15,6 @@ branches:
 jobs:
   include:
     - stage: build
-      script: make -C organized_dir/ all
+      script: make -C all
     - stage: test
       script: echo test

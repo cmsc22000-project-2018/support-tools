@@ -1,4 +1,4 @@
-#include "../include/testables.h"
+#include "testables.h"
 
 trie_t** return_trie_list() {
   trie_t** trie_list = malloc(3*sizeof(trie_t*));

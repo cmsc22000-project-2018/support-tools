@@ -5,9 +5,10 @@
  * I have now also modified almost all the functions to fix bugs, logic errors, etc
  */
 #include <stdio.h>
+#include <assert.h>
 #include <string.h>
 #include <stdlib.h>
-#include "../include/viz_functions.h"
+#include "viz_functions.h"
 
 /*
  * See viz_functions.h

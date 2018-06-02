@@ -6,7 +6,7 @@
 #include <string.h>
 #include <assert.h>
 #include <math.h>
-#include "../include/trie.h"
+#include "trie.h"
 #include "utils.h"
 
 /* See trie.h */
