@@ -153,7 +153,7 @@ b-e
 
 This project was made by:
 
-+ Hongji Li
++ Hongji Liu
 + Maxine King
 + Elizabeth Crowdus
 + Richard Pei
