@@ -10,26 +10,26 @@ trie_t** return_trie_list() {
 
 trie_t* first_trie() {
   trie_t* first = trie_new('\0');
-  trie_insert_string("and",first);
-  trie_insert_string("would",first);
-  trie_insert_string("wood",first);
+  trie_insert_string(first, "and");
+  trie_insert_string(first, "would");
+  trie_insert_string(first, "wood");
   return first;
 }
 
 trie_t* second_trie() {
   trie_t* second = trie_new('\0');
-  trie_insert_string("test",second);
-  trie_insert_string("something",second);
-  trie_insert_string("wow",second);
-  trie_insert_string("tea",second);
+  trie_insert_string(second, "test");
+  trie_insert_string(second, "something");
+  trie_insert_string(second, "wow");
+  trie_insert_string(second, "tea");
   return second;
 }
 trie_t* third_trie() {
   trie_t* third = trie_new('\0');
-  trie_insert_string("words",third);
-  trie_insert_string("cat",third);
-  trie_insert_string("catch",third);
-  trie_insert_string("dog",third);
-  trie_insert_string("borja",third);
+  trie_insert_string(third, "words");
+  trie_insert_string(third, "cat");
+  trie_insert_string(third, "catch");
+  trie_insert_string(third, "dog");
+  trie_insert_string(third, "borja");
   return third;
 }

@@ -37,7 +37,7 @@ int print_all_nodes(trie_t* t, char* prefix, char path[], int level, char* retur
      */
     if (run_with_prefix) {
        //make sure prefix is in the trie
-       if (trie_search(prefix, t) == 0) {
+       if (trie_search(t, prefix) == 0) {
           return 0;
        }
 
@@ -113,7 +113,7 @@ int print_only_leaves(trie_t* t, char* prefix, char path[], int level, char** re
      */
     if (run_with_prefix) {
        //make sure prefix is in the trie
-       if (trie_search(prefix, t) == 0) {
+       if (trie_search(t, prefix) == 0) {
           return 0;
        }
 
@@ -196,7 +196,7 @@ int print_only_words(trie_t* t, char* prefix, char path[], int level, char** ret
      */
     if (run_with_prefix) {
        //make sure prefix is in the trie
-       if (trie_search(prefix, t) == 0) {
+       if (trie_search(t, prefix) == 0) {
           return 0;
        }
 
