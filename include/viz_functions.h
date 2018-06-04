@@ -12,15 +12,17 @@
  * print_viz(Marco Harnam Kaisth)
  */
 
-#ifndef INCLUDE_VIS_FUNCTIONS_H
-#define INCLUDE_VIS_FUNCTIONS_H
+#ifndef INCLUDE_VIZ_FUNCTIONS_H
+#define INCLUDE_VIZ_FUNCTIONS_H
 
 #include <stdbool.h>
 #include "trie.h"
 
 
 /* Is Node:
- *
+ * Purpose: 
+ * checks if node exists in a given trie
+ * 
  * Parameters:
  *  - t: a trie pointer to the head of the tree
  *  - str: a string to search for in the tree
@@ -30,7 +32,7 @@
  */
 int is_node(trie_t* t, char* str);
 
-/*
+/* Has Children Prefic
  * check if a child with certain prefix exists in the trie
  *
  * Parameters:
@@ -44,6 +46,10 @@ int is_node(trie_t* t, char* str);
 bool has_children_prefix(trie_t *t, char *prefix);
 
 /* Print N Completions:
+ * writes children to a return_arr
+ * -selects children that are words
+ * -selects in alphabetical order
+ * -selects n number of words
  *
  * Parameters:
  *  - t: a trie pointer pointed to the head of the tree
@@ -61,6 +67,7 @@ bool has_children_prefix(trie_t *t, char *prefix);
 int print_n_completions(trie_t* t, char* prefix, char path[], int level, char** return_arr, unsigned int n);
 
 /* Leaf visualization
+ * Purpose: prints all leaves of a trie
  *
  * Parameters:
  *  - t: a trie pointer pointed to the head of the tree
@@ -77,6 +84,7 @@ int print_n_completions(trie_t* t, char* prefix, char path[], int level, char** 
 int print_only_leaves(trie_t* t, char* prefix, char path[], int level, char** return_arr, unsigned int* return_index);
 
 /* Word visualization
+ * Purpose: print all words in a trie
  *
  * Parameters:
  *  - t: a trie pointer pointed to the head of the tree
@@ -93,6 +101,7 @@ int print_only_leaves(trie_t* t, char* prefix, char path[], int level, char** re
 int print_only_words(trie_t* t, char* prefix, char path[], int level, char** return_arr, unsigned int* return_index);
 
 /* Exhaustive Visualization (All Nodes):
+ * Purpose: print all nodes of a trie
  *
  * Parameters:
  *  - t: a trie pointer pointed to the head of the tree
@@ -110,6 +119,7 @@ int print_only_words(trie_t* t, char* prefix, char path[], int level, char** ret
 int print_all_nodes(trie_t* t, char* prefix, char path[], int level, char** return_arr, unsigned int* return_index);
 
 /* Print Viz:
+ * Purpose: to be called by viz functions, prints char* array
  *
  * Parameters:
  *  - to_print: an aray of char*s to be printed
@@ -121,6 +131,7 @@ int print_all_nodes(trie_t* t, char* prefix, char path[], int level, char** retu
 void print_viz(char** to_print, unsigned int* num_items);
 
 /* Has Children:
+ * Purpose: determines if a trie is empty or not
  * Parameters:
  *  - t: a pointer to a trie node
  *
