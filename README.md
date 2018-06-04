@@ -149,6 +149,10 @@ Would yield:
 
 b-e
 
+## Redis functionality
+
+Our code was originally intended to function with Redis, a file control system listed above. While our tool and the trie Redis module have not yet been linked, in anticipation of future updates that allow our code to be used with Redis, a key-entry system would be used to interact with tries on the Redis server, and those tries would than be visualized. The actual visualization function occurs on the actual Redis server, simply returning your desired result. All above described inputs would function in the same way, except a key would be utilized instead of an index.
+
 # Authors
 
 This project was made by:
