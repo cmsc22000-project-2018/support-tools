@@ -11,6 +11,23 @@
 #include <stdlib.h>
 #include "../lib/api/include/trie.h"
 
+//helper make trie fn
+trie_t* generate_a_trie(){
+    trie_t *t = trie_new("test_a");
+
+    char* i1 = "a";
+    char* i2 = "at"; 
+    char* i3 = "and";
+
+    cr_assert_eq(trie_insert(t, "a"), 0, "couldn't insert word into trie");
+    cr_assert_eq(trie_insert(t, "at"), 0, "couldn't insert word into trie");
+    cr_assert_eq(trie_insert(t, "and"), 0, "couldn't insert word into trie");
+    cr_assert_eq(trie_insert(t, "add"), 0, "couldn't insert word into trie");
+    cr_assert_eq(trie_insert(t, "adding"), 0, "couldn't insert word into trie");
+    cr_assert_eq(trie_insert(t, "ab"), 0, "couldn't insert word into trie");
+    cr_assert_eq(trie_insert(t, "abstract"), 0, "couldn't insert word into trie");
+
+}
 //print_only_words tests
 Test(print_only_words, true_ex1){
     trie_t *t = trie_new("test");
