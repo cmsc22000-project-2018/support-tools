@@ -157,7 +157,7 @@ Our code was originally intended to function with Redis, a file control system l
 
 This project was made by:
 
-+ Hongji Li
++ Hongji Liu
 + Maxine King
 + Elizabeth Crowdus
 + Richard Pei
