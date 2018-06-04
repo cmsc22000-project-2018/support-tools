@@ -1,40 +1,28 @@
+#/*
+ * Visualization unit tests 
+ * Created by Elizabeth Crowdus and Richard Pei
+ */
+
 #include <criterion/criterion.h>
-#include <stdlib.h>
+#include <stdio.h>
 #include <stdbool.h>
 #include <stdarg.h>
 #include <string.h>
-#include "../include/viz_functions.h"
-#include "../include/trie.h"
+#include <stdlib.h>
+#include "../lib/api/include/trie.h"
 
+//print_only_words tests
+Test(print_only_words, true_ex1){
+    trie_t *t = trie_new("test");
 
-/* TESTS FOR TRIE_VISUALIZATION FNS
- * assumes all viz fns will return string to print
- */
+    char* i1 = "a";
+    char* i2 = "at"; 
+    char* i3 = "and";
 
-/* EXHAUSTIVE VISUALIZATION TESTS
- * eviz()
- */
-
-/*helper fn for eviz*/
-
-/* compare_char_arr
- * parameters: actual and expected char arrys, int of array size
- * compares char**
- * returns 0 if not identical
- * returns 1 if identical
- */
-int compare_char_arr(char** actual, char** expected, int size){
-    int i, j;
-
-    //loop through trie
-    for(i = 0; i < size; i++){
-        if(strcmp(actual[i], expected[i]) == 0)
-            return 0;
-        }
-    }
-    return 1; 
-}
-
+    cr_assert_eq(trie_insert(t, i1), 0, "couldn't insert word into trie");
+    cr_assert_eq(trie_insert(t, i2), 0, "couldn't insert word into trie");
+    cr_assert_eq(trie_insert(t, i3), 0, "couldn't insert word into trie");
+   
 /* eviz test cases */
 
 Test(eviz, empty_trie_true){
