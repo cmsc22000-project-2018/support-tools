@@ -20,9 +20,9 @@
 
 
 /* Is Node:
- * Purpose: 
+ * Purpose:
  * checks if node exists in a given trie
- * 
+ *
  * Parameters:
  *  - t: a trie pointer to the head of the tree
  *  - str: a string to search for in the tree
@@ -71,7 +71,7 @@ int print_n_completions(trie_t* t, char* prefix, char path[], int level, char** 
  *
  * Parameters:
  *  - t: a trie pointer pointed to the head of the tree
- *  - prefix: a prefix to visualize; to print the whole tree, set prefix = NULL 
+ *  - prefix: a prefix to visualize; to print the whole tree, set prefix = NULL
  *  - path: an empty string to fill as it goes down the trie
  *  - level: indicate the current level of the trie as well as
  *           the index of the str to fill
@@ -88,7 +88,7 @@ int print_only_leaves(trie_t* t, char* prefix, char path[], int level, char** re
  *
  * Parameters:
  *  - t: a trie pointer pointed to the head of the tree
- *  - prefix: a prefix to visualize; to print the whole tree, set prefix = NULL 
+ *  - prefix: a prefix to visualize; to print the whole tree, set prefix = NULL
  *  - path: an empty string to fill as it goes down the trie
  *  - level: indicate the current level of the trie as well as
  *           the index of the str to fill
@@ -105,7 +105,7 @@ int print_only_words(trie_t* t, char* prefix, char path[], int level, char** ret
  *
  * Parameters:
  *  - t: a trie pointer pointed to the head of the tree
- *  - prefix: a prefix to visualize; to print the whole tree, set prefix = NULL 
+ *  - prefix: a prefix to visualize; to print the whole tree, set prefix = NULL
  *  - path: an empty string to fill as it goes down the trie
  *  - level: indicate the current level of the trie as well as
  *           the index of the str to fill

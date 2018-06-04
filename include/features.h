@@ -22,8 +22,8 @@ int quit(char** sups);
 int help(char** sups);
 
 
-/* Helper function for all visualizations 
- * Takes an input of a string that should contain only a number 
+/* Helper function for all visualizations
+ * Takes an input of a string that should contain only a number
  * Converts the string to a number, accesses the trie at that index in the trie.h file
  * Returns a pointer to it */
 trie_t* get_trie(char* index_str);
@@ -33,7 +33,7 @@ trie_t* get_trie(char* index_str);
  */
 void std_indent(char* string);
 
-/* Helper function to print with a given indentation 
+/* Helper function to print with a given indentation
  * Takes a string and a number n, prints the string with each line indented n spaces
  */
 void print_indented_n(char* string, int indent);
@@ -48,7 +48,7 @@ const char* inputs = {
   "wviz",
   "sviz",
 };
- 
+
 const int functions = {
   (*help)(char**),
   (*quit)(char**),

@@ -23,21 +23,24 @@
  * returns 0 if not identical
  * returns 1 if identical
  */
-int compare_char_arr(char** actual, char** expected, int size){
+int compare_char_arr(char** actual, char** expected, int size)
+{
     int i, j;
 
     //loop through trie
-    for(i = 0; i < size; i++){
+    for(i = 0; i < size; i++)
+    {
         if(strcmp(actual[i], expected[i]) == 0)
             return 0;
-        }
     }
-    return 1; 
+}
+return 1;
 }
 
 /* eviz test cases */
 
-Test(eviz, empty_trie_true){
+Test(eviz, empty_trie_true)
+{
     char** input = [""];
     trie_t *t = new_trie(input);
 
@@ -49,7 +52,8 @@ Test(eviz, empty_trie_true){
     cr_assert_eq(1, result, "eviz test failed");
 }
 
-Test(eviz, one_first_letter_true){
+Test(eviz, one_first_letter_true)
+{
     char** input = ["a", "an", "and", "at"];
     trie_t *t = new_trie(input);
 
@@ -61,7 +65,8 @@ Test(eviz, one_first_letter_true){
     cr_assert_eq(1, result, "eviz test failed");
 }
 
-Test(eviz, one_first_letter_false){
+Test(eviz, one_first_letter_false)
+{
     char ** input = ['a', 'an', 'and', 'at'];
     trie_t *t = new_trie(input);
 
@@ -80,7 +85,8 @@ Test(eviz, one_first_letter_false){
 
 /* lviz test cases */
 
-Test(lviz, one_first_letter_true){
+Test(lviz, one_first_letter_true)
+{
     char **input = ["c", "ca", "cat", "catc", "catch"];
     trie_t *t = new_trie(input);
 
@@ -93,7 +99,8 @@ Test(lviz, one_first_letter_true){
     cr_assert_eq(1, result, "lviz test failed");
 }
 
-Test(lviz, one_first_letter_false){
+Test(lviz, one_first_letter_false)
+{
     char **input = []"c", "ca", "cat", "catc", "catch"];
     trie_t *t = new_trie(input);
 
@@ -113,7 +120,8 @@ Test(lviz, one_first_letter_false){
 
 /* wviz test cases */
 
-Test(wviz, one_first_letter_true){
+Test(wviz, one_first_letter_true)
+{
     char **input = ["c", "ca", "cat", "catc", "catch"];
 
     trie_t *t = new_trie(input);
@@ -128,7 +136,8 @@ Test(wviz, one_first_letter_true){
 
 }
 
-Test(wviz, one_1st_letter_false){
+Test(wviz, one_1st_letter_false)
+{
     char **input = ["c", "ca", "cat", "catc", "catch"];
     trie_t *t = new_trie(input);
 
@@ -148,7 +157,8 @@ Test(wviz, one_1st_letter_false){
 
 /* sviz test cases */
 
-Test(sviz, working_trie_one_1st_letter){
+Test(sviz, working_trie_one_1st_letter)
+{
     char **input = ["c", "ca", "cat", "catc", "catch"];
     trie_t *t = new_trie(input);
 
@@ -162,7 +172,8 @@ Test(sviz, working_trie_one_1st_letter){
 
 }
 
-Test(sviz, working_trie_full_alphabet_start_letters){
+Test(sviz, working_trie_full_alphabet_start_letters)
+{
     char **input = ["c", "ca", "cat", "catc", "catch"];
     trie_t *t = new_trie(input);
 
