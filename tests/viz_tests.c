@@ -12,19 +12,20 @@
 #include <string.h>
 #include <stdlib.h>
 #include "../lib/api/include/trie.h"
+#include "../include/viz_functions.h"
 
 //helper make trie of words starting w 'a' fn
-trie_t* generate_a_trie(){
-    trie_t *t = trie_new("test_a");
+trie_t* generate_a_trie() {
+    trie_t *t = trie_new('\0');
 
-    cr_assert_eq(trie_insert(t, "a"), 0, "couldn't insert word into trie");
-    cr_assert_eq(trie_insert(t, "at"), 0, "couldn't insert word into trie");
-    cr_assert_eq(trie_insert(t, "an"), 0, "couldn't insert word into trie");
-    cr_assert_eq(trie_insert(t, "and"), 0, "couldn't insert word into trie");
-    cr_assert_eq(trie_insert(t, "add"), 0, "couldn't insert word into trie");
-    cr_assert_eq(trie_insert(t, "adding"), 0, "couldn't insert word into trie");
-    cr_assert_eq(trie_insert(t, "ab"), 0, "couldn't insert word into trie");
-    cr_assert_eq(trie_insert(t, "abstract"), 0, "couldn't insert word into trie");
+    trie_insert(t, "a");
+    trie_insert(t, "at");
+    trie_insert(t, "an");
+    trie_insert(t, "and");
+    trie_insert(t, "add");
+    trie_insert(t, "adding");
+    trie_insert(t, "ab");
+    trie_insert(t, "abstract");
 }
 
 //helper fn to compare char**
@@ -56,7 +57,8 @@ Test(print_n_completions, true_prefix) {
     char** actual;
     int* len_actual;
     //assert that it works
-    cr_assert_eq(print_n_completions(t, "ad", "", 0, actual, len_actual, 1), 1, "error in print_only_words");
+    int rc = print_n_completions(t, "ad", "", 0, actual, *len_actual);
+    cr_assert_eq(rc, 1, "error in print_only_words");
 
     //expected
     int len_expected = 1;
@@ -64,7 +66,7 @@ Test(print_n_completions, true_prefix) {
     expected[0] = "add";
  
     //check that same char** produced
-    cr_assert_eq(compare_char_arr(actual, len_actual, expected, len_expected), 1); 
+    cr_assert_eq(compare_char_arr(actual, *len_actual, expected, len_expected), 1); 
 }  
 
 Test(print_n_completions, false){
@@ -73,7 +75,8 @@ Test(print_n_completions, false){
     char** actual;
     int* len_actual;
     //assert that it works
-    cr_assert_eq(print_n_completions(t, "ad", "", 0, actual, len_actual, 1), 1, "error in print_only_words");
+    int rc = print_n_completions(t, "ad", "", 0, actual, *len_actual);
+    cr_assert_eq(rc, 1, "error in print_only_words");
 
     //expected
     int len_expected = 2;
@@ -82,7 +85,7 @@ Test(print_n_completions, false){
     expected[1] = "adding";
     
     //check that same char** NOT produced
-    cr_assert_eq(compare_char_arr(actual, len_actual, expected, len_expected), 0); 
+    cr_assert_eq(compare_char_arr(actual, *len_actual, expected, len_expected), 0); 
 }   
 
 //print_only_leaves
@@ -103,7 +106,7 @@ Test(print_only_leaves, true_null_prefix){
     expected[3] = "at";
 
     //check that same char** produced
-    cr_assert_eq(compare_char_arr(actual, len_actual, expected, len_expected), 1); 
+    cr_assert_eq(compare_char_arr(actual, *len_actual, expected, len_expected), 1); 
 } 
 
 Test(print_only_leaves, true_prefix){
@@ -121,7 +124,7 @@ Test(print_only_leaves, true_prefix){
     expected[1] = "adding";
     
     //check that same char** produced
-    cr_assert_eq(compare_char_arr(actual, len_actual, expected, len_expected), 1); 
+    cr_assert_eq(compare_char_arr(actual, *len_actual, expected, len_expected), 1); 
 }   
 
 Test(print_only_leaves, false){
@@ -140,7 +143,7 @@ Test(print_only_leaves, false){
     expected[2] = "at";
     
     //check that same char** NOT produced
-    cr_assert_eq(compare_char_arr(actual, len_actual, expected, len_expected), 0); 
+    cr_assert_eq(compare_char_arr(actual, *len_actual, expected, len_expected), 0); 
 }   
 
 //print_only_words tests
@@ -165,7 +168,7 @@ Test(print_only_words, true_null_prefix){
     expected[7] = "at";
 
     //check that same char** produced
-    cr_assert_eq(compare_char_arr(actual, len_actual, expected, len_expected), 1); 
+    cr_assert_eq(compare_char_arr(actual, *len_actual, expected, len_expected), 1); 
 } 
 
 Test(print_only_words, true_prefix){
@@ -183,7 +186,7 @@ Test(print_only_words, true_prefix){
     expected[1] = "adding";
     
     //check that same char** produced
-    cr_assert_eq(compare_char_arr(actual, len_actual, expected, len_expected), 1); 
+    cr_assert_eq(compare_char_arr(actual, *len_actual, expected, len_expected), 1); 
 }   
 
 Test(print_only_words, false){
@@ -202,7 +205,7 @@ Test(print_only_words, false){
     expected[2] = "at";
     
     //check that same char** NOT produced
-    cr_assert_eq(compare_char_arr(actual, len_actual, expected, len_expected), 0); 
+    cr_assert_eq(compare_char_arr(actual, *len_actual, expected, len_expected), 0); 
 }   
 
 //print_all_nodes
@@ -219,14 +222,14 @@ Test(print_all_nodes, true_null_prefix){
     char *expected[len_expected];
     expected[0]= "a";
     expected[1] = "ab";
-    expected[2] = "abs
+    expected[2] = "abs";
     expected[3] = "abst";
     expected[4] = "abstr";
     expected[5] = "abstra";
     expected[6] = "abstrac";
     expected[7] = "abstract";
     expected[8] = "ad";
-    exptected[9] = "add";
+    expected[9] = "add";
     expected[10] = "addi";
     expected[11] = "addin";
     expected[12] = "adding";
@@ -235,7 +238,7 @@ Test(print_all_nodes, true_null_prefix){
     expected[15] = "at";
 
     //check that same char** produced
-    cr_assert_eq(compare_char_arr(actual, len_actual, expected, len_expected), 1); 
+    cr_assert_eq(compare_char_arr(actual, *len_actual, expected, len_expected), 1); 
 } 
 
 Test(print_all_nodes, true_prefix){
@@ -253,7 +256,7 @@ Test(print_all_nodes, true_prefix){
     expected[1] = "adding";
     
     //check that same char** produced
-    cr_assert_eq(compare_char_arr(actual, len_actual, expected, len_expected), 1); 
+    cr_assert_eq(compare_char_arr(actual, *len_actual, expected, len_expected), 1); 
 }   
 
 Test(print_all_nodes, false){
@@ -272,5 +275,5 @@ Test(print_all_nodes, false){
     expected[2] = "at";
     
     //check that same char** NOT produced
-    cr_assert_eq(compare_char_arr(actual, len_actual, expected, len_expected), 0); 
+    cr_assert_eq(compare_char_arr(actual, *len_actual, expected, len_expected), 0); 
 }  
