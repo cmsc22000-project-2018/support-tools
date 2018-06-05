@@ -10,6 +10,7 @@ int trie_setup(){
     trie_insert(t, "and");
     trie_insert(t, "catch");
     trie_insert(t, "cat");
+    return 1;
 }
 
 int str_arrcmp(char** a1, char** a2, int len)
@@ -25,10 +26,10 @@ void gen_arr_test(char* test_name, char** given, char** expected, int len, int* 
 {
     (*total)++;
     if (!str_arrcmp(given, expected, len)){
-        printf("PASSED:%s\n",test_name)
+        printf("PASSED:%s\n",test_name);
         (*passed)++;
     } else {
-        printf("FAILED:%s\n",test_name) 
+        printf("FAILED:%s\n",test_name);
     }
     return;
 }
@@ -41,9 +42,10 @@ void test_all_nodes_no_p(trie_t* t, int* passed, int* total){
     char** return_array = malloc(1000*sizeof(char*));
     print_all_nodes(t, NULL, path, level, return_array, return_index);
 
-    char** expected = {"a","an","and","ap","app","appl","apple","c","ca","cat","catc","catch"};
+    char** expected = malloc(20*sizeof(char*));
+    expected = {"a","an","and","ap","app","appl","apple","c","ca","cat","catc","catch"};
     
-    gen_arr_test("all_nodes no prefix", return_array, expected, passed, total);
+    gen_arr_test("all_nodes no prefix", return_array, (*return_index), expected, passed, total);
     return;
 }
 
@@ -55,9 +57,10 @@ void test_all_nodes_p(trie_t* t, int* passed, int* total){
     char** return_array = malloc(1000*sizeof(char*));
     print_all_nodes(t, "ca", path, level, return_array, return_index);
 
-    char** expected = {"c","ca""cat","catc","catch"};
+    char** expected = malloc(20*sizeof(char*));
+    expected = {"c","ca""cat","catc","catch"};
     
-    gen_arr_test("all_nodes ca prefix", return_array, expected, passed, total);
+    gen_arr_test("all_nodes ca prefix", return_array, (*return_index), expected, passed, total);
     return;
 }
 
@@ -69,9 +72,10 @@ void test_only_leaves_no_p(trie_t* t, int* passed, int* total){
     char** return_array = malloc(1000*sizeof(char*));
     print_only_leaves(t, NULL, path, level, return_array, return_index);
 
-    char** expected = {"an","and","apple","cat","catch"};
+    char** expected = malloc(20*sizeof(char*));
+    expected = {"an","and","apple","cat","catch"};
     
-    gen_arr_test("all_nodes no prefix", return_array, expected, passed, total);
+    gen_arr_test("all_nodes no prefix", return_array, (*return_index), expected, passed, total);
     return;
 }
 
@@ -83,9 +87,10 @@ void test_only_leaves_p(trie_t* t, int* passed, int* total){
     char** return_array = malloc(1000*sizeof(char*));
     print_only_leaves(t, "ca", path, level, return_array, return_index);
 
-    char** expected = {"catch"};
+    char** expected = malloc(20*sizeof(char*));
+    expected = {"catch"};
     
-    gen_arr_test("all_nodes ca prefix", return_array, expected, passed, total);
+    gen_arr_test("all_nodes ca prefix", return_array, (*return_index), expected, passed, total);
     return;
 }
 
