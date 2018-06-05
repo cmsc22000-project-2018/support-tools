@@ -1,0 +1,1 @@
+vtests.o: vtests.c

@@ -69,7 +69,7 @@ Test(print_n_completions, true_prefix) {
     cr_assert_eq(compare_char_arr(actual, *len_actual, expected, len_expected), 1); 
 }  
 
-Test(print_n_completions, false){
+Test(print_n_completions, not_true){
     trie_t *t = generate_a_trie();
     //actual
     char** actual;
@@ -127,7 +127,7 @@ Test(print_only_leaves, true_prefix){
     cr_assert_eq(compare_char_arr(actual, *len_actual, expected, len_expected), 1); 
 }   
 
-Test(print_only_leaves, false){
+Test(print_only_leaves, not_true){
     trie_t *t = generate_a_trie();
     //actual
     char** actual;
@@ -189,7 +189,7 @@ Test(print_only_words, true_prefix){
     cr_assert_eq(compare_char_arr(actual, *len_actual, expected, len_expected), 1); 
 }   
 
-Test(print_only_words, false){
+Test(print_only_words, not_true){
     trie_t *t = generate_a_trie();
     //actual
     char** actual;
@@ -259,7 +259,7 @@ Test(print_all_nodes, true_prefix){
     cr_assert_eq(compare_char_arr(actual, *len_actual, expected, len_expected), 1); 
 }   
 
-Test(print_all_nodes, false){
+Test(print_all_nodes, not_true){
     trie_t *t = generate_a_trie();
     //actual
     char** actual;
