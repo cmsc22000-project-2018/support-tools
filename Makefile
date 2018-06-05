@@ -1,6 +1,6 @@
 .PHONY: all, clean
 CC = gcc
-LIB = redisApi
+LIB = libredisApi
 CFLAGS = -Wall -g -Wextra -std=c99 -D_GNU_SOURCE
 LDFLAGS = -Wl,-rpath,api/
 LIB = 

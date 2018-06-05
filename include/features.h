@@ -1,4 +1,4 @@
-#include "../lib/api/include/trie.h"
+#include "../api/include/trie.h"
 #include "etrie.h"
 
 /* When given the function and its arguments, excecutes the relevant function
