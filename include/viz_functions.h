@@ -16,7 +16,7 @@
 #define INCLUDE_VIZ_FUNCTIONS_H
 
 #include <stdbool.h>
-#include "trie.h"
+#include "../lib/api/include/trie.h"
 
 
 /* Is Node:

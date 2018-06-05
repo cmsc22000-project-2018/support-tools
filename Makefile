@@ -1,11 +1,9 @@
 .PHONY: all, clean
 CC = gcc
 CFLAGS = -Wall -g -Wextra -std=c99 -D_GNU_SOURCE
-SRC = src/features.c src/main.c src/viz_functions.c src/trie.c src/testables.c
+SRC = src/features.c src/main.c
 # IMPL = viz_draft.c
 OBJ = shell
-VIZ_SRC = src/viz_main.c src/viz_functions.c src/trie.c src/testables.c
-VIZ_OBJ = viz
 
 all: #implementation
 	$(CC) $(CFLAGS) $(SRC) -o $(OBJ) -lreadline 

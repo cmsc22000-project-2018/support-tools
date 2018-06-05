@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include "../include/features.h"
 #include "../include/viz_functions.h"
-#include "../include/testables.h"
 
 /* Setup to allow for handler array */
 typedef int (*command_function)(char** sups);
@@ -17,7 +16,9 @@ struct command
 /* Array containing existing commands and their relevant functions */
 struct command features[] =
 {
-    {"print", tprint},
+//    {"print", tprint},
+    {"insert", tinsert},
+    {"new", tnew},
     {"help", help},
     {"quit", quit},
     {"q", quit},
@@ -39,6 +40,36 @@ int exec(char* arg, char* sups[])
     return 0;
 }
 
+int tnew(char** sups)
+{
+    char* trie_key = sups[0];
+    if (trie_key == NULL)
+    {
+        return 0;
+    }
+    trie_t* t = trie_new(trie_key);
+    int success = 1;
+    return success;
+}
+
+int tinsert(char** sups)
+{
+    trie_t* t = get_trie(sups[0]);
+    if (t == NULL)
+    {
+        return 0;
+    }
+    char* to_add = sups[1];
+    if (to_add == NULL)
+    {
+        return 0;
+    }
+    int success = trie_insert(t, to_add);
+    return success;
+}
+    
+
+/*
 int tprint(char** sups)
 {
     trie_t* t = get_trie(sups[0]);
@@ -89,7 +120,7 @@ int tprint(char** sups)
     print_viz(return_array, return_index);
     return success;
 }
-
+*/
 
 int quit(char** sups)
 {
