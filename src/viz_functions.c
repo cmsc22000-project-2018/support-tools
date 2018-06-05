@@ -16,17 +16,17 @@ int print_all_nodes(trie_t* t, char* prefix, char path[], int level, char* retur
      */
     if (t == NULL)
     {
-        fprintf(stderr, "print_all_nodes: t is NULL");
+        fprintf(stderr, "print_all_nodes: t is NULL\n");
         return 0;
     }
     if (return_arr == NULL)
     {
-        fprintf(stderr, "print_all_nodes: return_arr is NULL");
+        fprintf(stderr, "print_all_nodes: return_arr is NULL\n");
         return 0;
     }
     if (return_index == NULL)
     {
-        fprintf(stderr, "print_all_nodes: return_index is NULL");
+        fprintf(stderr, "print_all_nodes: return_index is NULL\n");
         return 0;
     }
 
@@ -102,17 +102,17 @@ int print_only_leaves(trie_t* t, char* prefix, char path[], int level, char** re
      */
     if (t == NULL)
     {
-        fprintf(stderr, "print_only_leaves: t is NULL");
+        fprintf(stderr, "print_only_leaves: t is NULL\n");
         return 0;
     }
     if (return_arr == NULL)
     {
-        fprintf(stderr, "print_only_leaves: return_arr is NULL");
+        fprintf(stderr, "print_only_leaves: return_arr is NULL\n");
         return 0;
     }
     if (return_index == NULL)
     {
-        fprintf(stderr, "print_only_leaves: return_index is NULL");
+        fprintf(stderr, "print_only_leaves: return_index is NULL\n");
         return 0;
     }
 
@@ -193,17 +193,17 @@ int print_only_words(trie_t* t, char* prefix, char path[], int level, char** ret
      */
     if (t == NULL)
     {
-        fprintf(stderr, "print_only_words: t is NULL");
+        fprintf(stderr, "print_only_words: t is NULL\n");
         return 0;
     }
     if (return_arr == NULL)
     {
-        fprintf(stderr, "print_only_words: return_arr is NULL");
+        fprintf(stderr, "print_only_words: return_arr is NULL\n");
         return 0;
     }
     if (return_index == NULL)
     {
-        fprintf(stderr, "print_only_words: return_index is NULL");
+        fprintf(stderr, "print_only_words: return_index is NULL\n");
         return 0;
     }
 

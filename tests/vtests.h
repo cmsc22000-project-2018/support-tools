@@ -1,8 +1,10 @@
-#include "../lib/api/include/trie.h"
+#include "trie.h"
+trie_t* trie_setup();
 
 int str_arrcmp(char** a1, char** a2, int len);
 
-int gen_arr_test(char* test_name, char** given, char** expected, int len, int* passed, int* total);
+void gen_arr_test(char* test_name, char** given, char** expected, int len, int* passed, int* total);
+void gen_error_test(char* test_name, int returned, int* passed, int* total);
 
 void test_all_nodes_no_p(trie_t* t, int* passed, int* total);
 void test_all_nodes_p(trie_t* t, int* passed, int* total);
