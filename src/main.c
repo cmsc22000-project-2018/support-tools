@@ -36,10 +36,10 @@ int main()
 {
     std_indent("\nWelcome to our Trie Visualizations tool!\n"
                "You can use this tool to visualize tries in terms of:\n"
-               "    - all their nodes (print <trie> all-nodes)\n"
-               "    - only the leaves (print <trie> only-leaves)\n"
-               "    - only the words (print <trie> only-words\n"
-               "    - n completions for a given prefix (n-completions <trie> <prefix> <n>)\n"
+               "    - all their nodes (print [trie] all-nodes)\n"
+               "    - only the leaves (print [trie] only-leaves)\n"
+               "    - only the words (print [trie] only-words\n"
+               "    - n completions for a given prefix (print [trie] n-completions [prefix] [n])\n"
                "Add a prefix to any of the first three commands to see that it for a sub-trie\n"
                "For more help, type 'help'\n"
                "To exit, type 'quit'\n\n");
