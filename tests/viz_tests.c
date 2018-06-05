@@ -1,4 +1,4 @@
-#/*
+/*
  * Visualization unit tests 
  * Created by Elizabeth Crowdus and Richard Pei
  *
@@ -14,7 +14,6 @@
 #include "../lib/api/include/trie.h"
 #include "../include/viz_functions.h"
 
-<<<<<<< HEAD
 //helper make trie of words starting w 'a' fn
 trie_t* generate_a_trie() {
     trie_t *t = trie_new('\0');
@@ -278,7 +277,7 @@ Test(print_all_nodes, false){
     //check that same char** NOT produced
     cr_assert_eq(compare_char_arr(actual, *len_actual, expected, len_expected), 0); 
 }  
-=======
+
 /* compare_char_arr
  * parameters: actual and expected char arrys, int of array size
  * compares char**
@@ -448,4 +447,3 @@ Test(sviz, working_trie_full_alphabet_start_letters)
     cr_assert_eq(0, result, "wviz test failed");
 
 }
->>>>>>> master

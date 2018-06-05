@@ -1,5 +1,3 @@
-#adapted from Lab5
-
 CC = gcc
 CFLAGS = -fPIC -Wall -Wextra -O2 -g -I../include/
 LDFLAGS = -L../ -Wl,-rpath,lib/api/
