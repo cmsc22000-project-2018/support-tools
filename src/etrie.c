@@ -1,13 +1,11 @@
-/*
-		 A etrie data structure
-	*/
+/* A etrie data structure */
 	
 
 	#include <stdlib.h>
 	#include <string.h>
 	#include <assert.h>
 	#include <math.h>
-	#include "etrie.h"
+	#include "../include/etrie.h"
 	#include "utils.h"
 	#include <stdbool.h>
 	

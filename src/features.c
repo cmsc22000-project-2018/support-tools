@@ -2,10 +2,12 @@
 #include <string.h>
 #include <stdio.h>
 #include "../include/features.h"
+#include "../include/testables.h"
 #include "../include/viz_functions.h"
 
 /* Setup to allow for handler array */
 typedef int (*command_function)(char** sups);
+
 
 struct command
 {
@@ -16,7 +18,7 @@ struct command
 /* Array containing existing commands and their relevant functions */
 struct command features[] =
 {
-//    {"print", tprint},
+    {"print", tprint},
     {"insert", tinsert},
     {"new", tnew},
     {"help", help},
@@ -27,6 +29,8 @@ struct command features[] =
 
 /* Number of features */
 int num_features = sizeof(features) / sizeof(struct command);
+
+
 
 int exec(char* arg, char* sups[])
 {
@@ -76,12 +80,13 @@ int tinsert(char** sups)
 }
     
 
-/*
+
 int tprint(char** sups)
 {
-    trie_t* t = get_trie(sups[0]);
+    etrie_t* t = get_etrie(sups[0]);
     if (t == NULL)
     {
+	printf("t was null\n");
         return 0;
     }
 
@@ -127,7 +132,6 @@ int tprint(char** sups)
     print_viz(return_array, return_index);
     return success;
 }
-*/
 
 int quit(char** sups)
 {
@@ -222,14 +226,12 @@ int help(char** sups)
 }
 //137 to 205
 
-/*
-trie_t* get_trie(char* index_str)
+etrie_t* get_etrie(char* index_str)
 {
-    trie_t** tries = return_trie_list();
+    etrie_t** etries = return_etrie_list();
     int index = atoi(index_str);
-    return tries[index];
+    return etries[index];
 }
-*/
 
 void std_indent(char* string)
 {

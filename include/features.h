@@ -1,4 +1,5 @@
 #include "../lib/api/include/trie.h"
+#include "etrie.h"
 
 /* When given the function and its arguments, excecutes the relevant function
  * Returns -2 if the input is "quit"
@@ -13,7 +14,7 @@ int exec(char* arg, char* sups[]);
  * Uses the third optionally as a prefix
  * Uses the fourth optionally as a number of completions
  * Returns 1, 0, or -1 as described above */
-//int tprint(char** sups);
+int tprint(char** sups);
 
 /* Takes an input of supplementary arguments
  * Interprets the first argument to represent the key of a trie
@@ -37,7 +38,7 @@ int help(char** sups);
  * Takes an input of a string that should contain only a number
  * Converts the string to a number, accesses the trie at that index in the trie.h file
  * Returns a pointer to it */
-trie_t* get_trie(char* index_str);
+etrie_t* get_etrie(char* index_str);
 
 /* Helper function to print with a standardized indentation
  * Takes an input of a string and prints with 2 spaces as an indent
