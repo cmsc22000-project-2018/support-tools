@@ -47,13 +47,16 @@ int exec(char* arg, char* sups[])
 int tnew(char** sups)
 {
     char* trie_key = sups[0];
+    char* to_add = sups[1];
     printf("key is %s\n",trie_key);
+    printf("to_add is %s\n",to_add);
     if (trie_key == NULL)
     {
         printf("trie key was null\n");
         return 0;
     }
     trie_t* t = trie_new(trie_key);
+    trie_insert(t,to_add);
     printf("trie is at location %x\n",t);
     int success = t ? 1 : 0;
     return success;
