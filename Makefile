@@ -2,13 +2,14 @@
 CC = gcc
 LIB = redisApi
 CFLAGS = -Wall -g -Wextra -std=c99 -D_GNU_SOURCE
-LDFLAGS = -Wl,-rpath,lib/api/
+LDFLAGS = -Wl,-rpath,api/
 LIB = 
 SRC = src/features.c src/main.c src/etrie.c src/viz_functions.c src/testables.c
 # IMPL = viz_draft.c
 OBJ = shell
 
 all: #implementation
+	make -C api
 	$(CC) -Llib/api/ $(LDFLAGS) $(CFLAGS) $(SRC) -o $(OBJ) -lreadline -lredisApi
 # implementation:
 #	$(CC) $(CLFLAGS) -c $(IMPL) -o implementation
