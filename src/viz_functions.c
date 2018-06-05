@@ -43,6 +43,7 @@ int print_all_nodes(etrie_t* t, char* prefix, char path[], int level, char* retu
         //make sure prefix is in the etrie
         if (etrie_search(t, prefix) == 0)
         {
+            printf("Prefix not in trie.\n");
             return 0;
         }
 
@@ -129,6 +130,7 @@ int print_only_leaves(etrie_t* t, char* prefix, char path[], int level, char** r
         //make sure prefix is in the etrie
         if (etrie_search(t, prefix) == 0)
         {
+            printf("Prefix not in trie.\n");
             return 0;
         }
 
@@ -220,6 +222,7 @@ int print_only_words(etrie_t* t, char* prefix, char path[], int level, char** re
         //make sure prefix is in the etrie
         if (etrie_search(t, prefix) == 0)
         {
+            printf("Prefix not in trie.\n");
             return 0;
         }
 
@@ -280,6 +283,11 @@ int print_only_words(etrie_t* t, char* prefix, char path[], int level, char** re
 int print_n_completions(etrie_t* t, char* prefix, char path[], int level, char** return_arr, unsigned int n)
 {
     unsigned int* return_index = malloc(sizeof(unsigned int));
+    if (etrie_search(t, prefix) == 0)
+    {
+        printf("Prefix not in trie.\n");
+        return 0;
+    }
     print_only_words(t, prefix, path, level, return_arr, return_index);
     if (*return_index > n)
     {
