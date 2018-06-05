@@ -50,7 +50,7 @@ int compare_char_arr(char** actual, int len_actual, char** expected, int len_exp
 }
 
 //print_n_completions tests
-Test(print_n_completions, true_prefix){
+Test(print_n_completions, true_prefix) {
     trie_t *t = generate_a_trie();
     //actual
     char** actual;
