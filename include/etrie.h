@@ -1,11 +1,11 @@
 /* A trie data structure, in explicit format, taken from the redis-tries team */
 
-#ifndef INCLUDE_TRIE_H_
-#define INCLUDE_TRIE_H_
+#ifndef INCLUDE_ETRIE_H_
+#define INCLUDE_ETRIE_H_
 
-#define IN_TRIE 1
-#define NOT_IN_TRIE 0 
-#define PARTIAL_IN_TRIE (-1)
+#define IN_ETRIE 1
+#define NOT_IN_ETRIE 0 
+#define PARTIAL_IN_ETRIE (-1)
 
 #include <stdbool.h>
 
@@ -40,7 +40,7 @@ struct etrie_t {
      - A pointer to the trie, or NULL if a pointer 
        cannot be allocated
 */
-etrie_t *trie_new(char current);
+etrie_t *etrie_new(char current);
 
 /*
     Free an entire trie.
@@ -50,7 +50,7 @@ etrie_t *trie_new(char current);
     Returns:
      - Always returns 0
 */
-int trie_free(etrie_t *t);
+int etrie_free(etrie_t *t);
 
 
 /*
@@ -65,7 +65,7 @@ int trie_free(etrie_t *t);
      - Set t->children[current] to be current
      - is_word for new node set to 0.
 */
-int trie_add_node(etrie_t *t, char current);
+int etrie_add_node(etrie_t *t, char current);
 
 /*
     Inserts word into trie.
@@ -84,7 +84,7 @@ int trie_add_node(etrie_t *t, char current);
      - Then move on to the next character in string
      - Set the is_word of the last node to 1
 */
-int trie_insert_string(etrie_t *t, char *word);
+int etrie_insert_string(etrie_t *t, char *word);
 
 /*
     Checks if a char exists in a trie 
@@ -107,7 +107,7 @@ bool trie_char_exists(etrie_t *t, char c);
      - pointer to the last letter in the word/prefix if word/prefix is found. 
      - NULL if word/prefix is not found.
  */
-etrie_t *trie_get_subtrie(etrie_t *t, char* word);
+etrie_t *etrie_get_subtrie(etrie_t *t, char* word);
 
 /* 
     Searches for word in a trie 
@@ -120,7 +120,7 @@ etrie_t *trie_get_subtrie(etrie_t *t, char* word);
      - NOT_IN_TRIE  if word is not found at all.
      - PARTIAL_IN_TRIE if word is found but end node's is_word is 0.
  */
-int trie_search(etrie_t *t, char *word);
+int etrie_search(etrie_t *t, char *word);
 
 /*
     Count the number of different possible endings of a given prefix in a trie
@@ -132,6 +132,6 @@ int trie_search(etrie_t *t, char *word);
      - an integer of the number of endings if the prefix exists in the trie
      - 0 if the prefix does not exist in the trie
 */
-int trie_count_completion(etrie_t *t, char *pre);
+int etrie_count_completion(etrie_t *t, char *pre);
 
 #endif
