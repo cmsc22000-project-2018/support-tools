@@ -10,7 +10,7 @@ OBJ = shell
 
 all: #implementation
 	make -C api
-	$(CC) -Llib/api/ $(LDFLAGS) $(CFLAGS) $(SRC) -o $(OBJ) -lreadline -lredisApi
+	$(CC) -Lapi/ $(LDFLAGS) $(CFLAGS) $(SRC) -o $(OBJ) -lreadline -lredisApi
 # implementation:
 #	$(CC) $(CLFLAGS) -c $(IMPL) -o implementation
 viz:
