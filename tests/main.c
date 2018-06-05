@@ -4,8 +4,6 @@
 #include <criterion/options.h>
 #include <criterion/output.h>
 
-//used code from lab libgeometry tests
-
 int main(int argc, char *argv[]) {
     struct criterion_test_set *tests = criterion_initialize();
 

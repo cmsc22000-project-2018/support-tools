@@ -2,10 +2,10 @@
 
 CC = gcc
 CFLAGS = -fPIC -Wall -Wextra -O2 -g -I../include/
-LDFLAGS = -L../ -Wl,-rpath,.
+LDFLAGS = -L../ -Wl,-rpath,lib/api/
 RM = rm -f
 BIN = test-supporttools
-LDLIBS = -lcriterion
+LDLIBS = -lcriterion -lredisApi
 
 SRCS = main.c  viz_tests.c
 OBJS = $(SRCS:.c=.o)
