@@ -43,17 +43,22 @@ int exec(char* arg, char* sups[])
 int tnew(char** sups)
 {
     char* trie_key = sups[0];
+    printf("key is %s\n",trie_key);
     if (trie_key == NULL)
     {
+        printf("trie key was null\n");
         return 0;
     }
     trie_t* t = trie_new(trie_key);
-    int success = 1;
+    printf("trie is at location %x\n",t);
+    int success = t ? 1 : 0;
     return success;
 }
 
+
 int tinsert(char** sups)
 {
+/*
     trie_t* t = get_trie(sups[0]);
     if (t == NULL)
     {
@@ -66,6 +71,8 @@ int tinsert(char** sups)
     }
     int success = trie_insert(t, to_add);
     return success;
+*/
+    return 1;
 }
     
 
@@ -215,16 +222,14 @@ int help(char** sups)
 }
 //137 to 205
 
+/*
 trie_t* get_trie(char* index_str)
 {
     trie_t** tries = return_trie_list();
     int index = atoi(index_str);
-    /*  if (index >= num_tries){
-        return NULL;
-      }
-    */
     return tries[index];
 }
+*/
 
 void std_indent(char* string)
 {
