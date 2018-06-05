@@ -9,13 +9,13 @@
 
 #include <stdbool.h>
 
-typedef struct trie_t trie_t;
-struct trie_t {
-    /* The first trie_t will be '/0' for any Trie. */
+typedef struct etrie_t etrie_t;
+struct etrie_t {
+    /* The first etrie_t will be '/0' for any Trie. */
     char current; 
     
     /* ALPHABET_SIZE is 256 for all possible characters. */
-    trie_t **children;
+    etrie_t **children;
     
     /* 
         If is_word is 1, indicates that this is the end of a word. 
@@ -23,15 +23,15 @@ struct trie_t {
      */
     int is_word; 
     
-    /* Parent trie_t for traversing backwards */
-    trie_t *parent;
+    /* Parent etrie_t for traversing backwards */
+    etrie_t *parent;
     
     /* Array of characters that are contained in the node and its children */
     char *charlist;
 };
 
 /*
-    Creates and allocates memory for new trie_t.
+    Creates and allocates memory for new etrie_t.
     
     Parameters:
      - current: A char for the current character
@@ -40,7 +40,7 @@ struct trie_t {
      - A pointer to the trie, or NULL if a pointer 
        cannot be allocated
 */
-trie_t *trie_new(char current);
+etrie_t *trie_new(char current);
 
 /*
     Free an entire trie.
@@ -50,11 +50,11 @@ trie_t *trie_new(char current);
     Returns:
      - Always returns 0
 */
-int trie_free(trie_t *t);
+int trie_free(etrie_t *t);
 
 
 /*
-    Creates new node in trie_t.
+    Creates new node in etrie_t.
     Parameters:
      - t: A pointer to the trie where the node is to be added   
      - current: A char indicating the character of the node being added
@@ -65,7 +65,7 @@ int trie_free(trie_t *t);
      - Set t->children[current] to be current
      - is_word for new node set to 0.
 */
-int trie_add_node(trie_t *t, char current);
+int trie_add_node(etrie_t *t, char current);
 
 /*
     Inserts word into trie.
@@ -84,7 +84,7 @@ int trie_add_node(trie_t *t, char current);
      - Then move on to the next character in string
      - Set the is_word of the last node to 1
 */
-int trie_insert_string(trie_t *t, char *word);
+int trie_insert_string(etrie_t *t, char *word);
 
 /*
     Checks if a char exists in a trie 
@@ -95,7 +95,7 @@ int trie_insert_string(trie_t *t, char *word);
      - true if c exists in t
      - false if it doesn't
 */
-bool trie_char_exists(trie_t *t, char c); 
+bool trie_char_exists(etrie_t *t, char c); 
 
 /* 
     Searches for a word/prefix in a trie 
@@ -107,7 +107,7 @@ bool trie_char_exists(trie_t *t, char c);
      - pointer to the last letter in the word/prefix if word/prefix is found. 
      - NULL if word/prefix is not found.
  */
-trie_t *trie_get_subtrie(trie_t *t, char* word);
+etrie_t *trie_get_subtrie(etrie_t *t, char* word);
 
 /* 
     Searches for word in a trie 
@@ -120,7 +120,7 @@ trie_t *trie_get_subtrie(trie_t *t, char* word);
      - NOT_IN_TRIE  if word is not found at all.
      - PARTIAL_IN_TRIE if word is found but end node's is_word is 0.
  */
-int trie_search(trie_t *t, char *word);
+int trie_search(etrie_t *t, char *word);
 
 /*
     Count the number of different possible endings of a given prefix in a trie
@@ -132,6 +132,6 @@ int trie_search(trie_t *t, char *word);
      - an integer of the number of endings if the prefix exists in the trie
      - 0 if the prefix does not exist in the trie
 */
-int trie_count_completion(trie_t *t, char *pre);
+int trie_count_completion(etrie_t *t, char *pre);
 
 #endif
