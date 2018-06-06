@@ -1,39 +1,39 @@
 #include "../include/testables.h"
 
-trie_t** return_trie_list()
+etrie_t** return_etrie_list()
 {
-    trie_t** trie_list = malloc(3*sizeof(trie_t*));
-    trie_list[0] = first_trie();
-    trie_list[1] = second_trie();
-    trie_list[2] = third_trie();
-    return trie_list;
+    etrie_t** etrie_list = malloc(3*sizeof(etrie_t*));
+    etrie_list[0] = first_etrie();
+    etrie_list[1] = second_etrie();
+    etrie_list[2] = third_etrie();
+    return etrie_list;
 }
 
-trie_t* first_trie()
+etrie_t* first_etrie()
 {
-    trie_t* first = trie_new('\0');
-    trie_insert_string(first, "and");
-    trie_insert_string(first, "would");
-    trie_insert_string(first, "wood");
+    etrie_t* first = etrie_new('\0');
+    etrie_insert_string(first, "and");
+    etrie_insert_string(first, "would");
+    etrie_insert_string(first, "wood");
     return first;
 }
 
-trie_t* second_trie()
+etrie_t* second_etrie()
 {
-    trie_t* second = trie_new('\0');
-    trie_insert_string(second, "test");
-    trie_insert_string(second, "something");
-    trie_insert_string(second, "wow");
-    trie_insert_string(second, "tea");
+    etrie_t* second = etrie_new('\0');
+    etrie_insert_string(second, "test");
+    etrie_insert_string(second, "something");
+    etrie_insert_string(second, "wow");
+    etrie_insert_string(second, "tea");
     return second;
 }
-trie_t* third_trie()
+etrie_t* third_etrie()
 {
-    trie_t* third = trie_new('\0');
-    trie_insert_string(third, "words");
-    trie_insert_string(third, "cat");
-    trie_insert_string(third, "catch");
-    trie_insert_string(third, "dog");
-    trie_insert_string(third, "borja");
+    etrie_t* third = etrie_new('\0');
+    etrie_insert_string(third, "words");
+    etrie_insert_string(third, "cat");
+    etrie_insert_string(third, "catch");
+    etrie_insert_string(third, "dog");
+    etrie_insert_string(third, "borja");
     return third;
 }

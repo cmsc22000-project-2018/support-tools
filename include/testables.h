@@ -1,8 +1,8 @@
 #include <stdlib.h>
-#include "trie.h"
+#include "etrie.h"
 
-trie_t** return_trie_list();
+etrie_t** return_etrie_list();
 
-trie_t* first_trie();
-trie_t* second_trie();
-trie_t* third_trie();
+etrie_t* first_etrie();
+etrie_t* second_etrie();
+etrie_t* third_etrie();
