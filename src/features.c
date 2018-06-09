@@ -158,9 +158,14 @@ int help(char** sups)
                    "all-nodes\t prints out all nodes of the trie\n"
                    "only-words\t only prints out valid words of the trie\n"
                    "only-leaves\t only prints out the leaves of the trie\n"
+<<<<<<< HEAD
                    "n-completions\t prints out n completions of a trie\n"
                    "Note: n completions must also be used with a number:\n"
                    "print <trie> n-completions [prefix] [n]\n"
+=======
+                   "n-completions\t is use slightly differently to print out n completions of a prefix in a trie\n"
+                   "Type print <trie> n-completions [prefix] [n] to use\n"
+>>>>>>> 3cc11b13a02ab37f71843028d6e3c20b63e1e248
                    "Type 'help [option]' for more information on each option.\n\n"
                    "Prefix:\n"
                    "Include the prefix in a trie to print out only the subtrie under that prefix.\n");
